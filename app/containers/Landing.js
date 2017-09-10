@@ -24,8 +24,20 @@ class Landing extends React.Component {
             </section>
             <section className='navbar-center'>Luxor Mining</section>
             <section className='navbar-section'>
-              <a href='#' className='btn btn-link'>Twitter</a>
-              <a href='#' className='btn btn-link'>GitHub</a>
+              <a
+                target='_blank'
+                href='https://twitter.com/LuxorTechTeam'
+                className='btn btn-link'
+              >
+                Twitter
+              </a>
+              <a
+                target='_blank'
+                href='https://github.com/LuxorLabs'
+                className='btn btn-link'
+              >
+                GitHub
+              </a>
             </section>
           </header>
         </Nav>
@@ -38,6 +50,7 @@ class Landing extends React.Component {
                   <th>Address</th>
                   <th>Hashrate</th>
                   <th>Efficiency</th>
+                  <th>Last Active</th>
                 </tr>
               </thead>
               <tbody>
@@ -50,15 +63,16 @@ class Landing extends React.Component {
     )
   }
   mapStats = stats => {
-    return stats.users.map(m => {
+    return stats.users.map((m, i) => {
       console.log(m)
 
       return (
         <tr key={m.address}>
-          <td>1</td>
+          <td>{i + 1}</td>
           <td>{m.address}</td>
-          <td>{m.hashrate / 1000000}</td>
+          <td>{m.hashrate / 1000000000} GH/s</td>
           <td>100%</td>
+          <td>1 Min. Ago</td>
         </tr>
       )
     })
