@@ -5,6 +5,7 @@ import 'styles/spectre.scss'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Navigation from 'components/Navigation'
+import moment from 'moment'
 
 @inject('mainStore')
 @observer
@@ -45,20 +46,29 @@ class Landing extends React.Component {
     }
   }
   mapStats = stats => {
-    console.log(stats.users)
-    return stats.users.map((m, i) => {
-      console.log(m)
-
-      return (
-        <tr key={m.address}>
-          <td>{i + 1}</td>
-          <td><Link to={`/miner/${m.address}`}>{m.address}</Link></td>
-          <td>{m.hashrate / 1000000} MH/s</td>
-          <td>100%</td>
-          <td>1 Min. Ago</td>
-        </tr>
-      )
-    })
+    return stats.users
+      .sort((a, b) => {
+        return b.hashrate - a.hashrate
+      })
+      .map((m, i) => {
+        const time = m.miners
+          .map(w => w.last_beat)
+          .reduce((c, a) => (c > a ? c : a))
+        console.log(time)
+        const eff = m.rejects_count > 0 || m.invalid_shares_count > 0
+          ? 100 -
+              (m.rejects_count + m.invalid_shares_count) / m.valid_shares_count
+          : 100
+        return (
+          <tr key={m.address}>
+            <td>{i + 1}</td>
+            <td><Link to={`/miner/${m.address}`}>{m.address}</Link></td>
+            <td>{m.hashrate / 1000000} MH/s</td>
+            <td>{eff.toFixed(2)}%</td>
+            <td>{moment.unix(time).fromNow()}</td>
+          </tr>
+        )
+      })
   }
 }
 
