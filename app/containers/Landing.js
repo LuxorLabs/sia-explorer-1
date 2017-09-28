@@ -100,9 +100,9 @@ class Landing extends React.Component {
         return b.hashrate - a.hashrate
       })
       .map((m, i) => {
-        const time = m.miners
-          .map(w => w.last_beat)
-          .reduce((c, a) => (c > a ? c : a))
+        const time = m.miners && m.miners.length > 0
+          ? m.miners.map(w => w.last_beat).reduce((c, a) => (c > a ? c : a))
+          : 0
         const eff = m.rejects_count > 0 || m.invalid_shares_count > 0
           ? 100 -
               (m.rejects_count + m.invalid_shares_count) / m.valid_shares_count
@@ -114,7 +114,7 @@ class Landing extends React.Component {
             <td>{m.address}</td>
             <td>{m.hashrate / 1000000} MH/s</td>
             <td>{eff.toFixed(2)}%</td>
-            <td>{moment.unix(time).fromNow()}</td>
+            <td>{time === 0 ? 'Never' : moment.unix(time).fromNow()}</td>
           </tr>
         )
       })
