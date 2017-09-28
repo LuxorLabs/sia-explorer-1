@@ -19,7 +19,6 @@ class HashrateCalculator {
   }
   filterDate = (dateMax, hashrate) => {
     return hashrate.filter(e => {
-      console.log(moment(e.time).unix(), dateMax)
       return moment(e.time).unix() > dateMax
     })
   }
@@ -27,7 +26,6 @@ class HashrateCalculator {
     const now = moment.now()
     const dateMax = moment(now).subtract(minutes, 'minutes').unix()
     const filteredHr = this.filterDate(dateMax, hashrate)
-    console.log(filteredHr)
     return this.smartHashrate(filteredHr)
   }
 }
