@@ -7,15 +7,16 @@ class Navigation extends Component {
       <Nav className='container grid-xl '>
         <header className='navbar'>
           <section className='navbar-section'>
-            <div className='form-group'>
+            <strong>Luxor Mining Private Beta</strong>
+            {/* <div className='form-group'>
               <input
                 className='form-input'
                 type='text'
                 placeholder='Search...'
               />
-            </div>
+            </div> */}
           </section>
-          <section className='navbar-center'>Luxor Mining</section>
+          {/* <section className='navbar-center'>Luxor Mining</section> */}
           <section className='navbar-section'>
             <a
               target='_blank'

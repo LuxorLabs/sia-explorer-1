@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { inject, observer } from 'mobx-react'
 import 'styles/spectre.scss'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import Navigation from 'components/Navigation'
 import moment from 'moment'
 
@@ -12,7 +12,7 @@ import moment from 'moment'
 class Landing extends React.Component {
   componentWillMount () {
     this.playMe = () => {
-      setInterval(() => {
+      this.tempInterval = setInterval(() => {
         function beep () {
           const c = document.createElement('audio')
           c.src =
@@ -27,6 +27,9 @@ class Landing extends React.Component {
       axios.get('/api/stats').then(({ data }) => {
         if (data.block_stats !== null && data.block_stats.length > 0) {
           this.playMe()
+          setTimeout(() => {
+            clearInterval(this.tempInterval)
+          }, 10000)
         }
         this.props.mainStore.stats = data
       })
@@ -56,10 +59,39 @@ class Landing extends React.Component {
               </table>
             </div>
           </Tables>
+          <Padding>
+            <div className='m-2 p2 text-center'>
+              <h4>Get Started</h4>
+              <pre>
+                ./marlin -H us-east.luxor.tech:3333 -u YourSiacoinAddress.YourWorkerName -I 28
+              </pre>
+              <pre>
+                ./ccminer -a sia -e --url=stratum+tcp://us-east.luxor.tech:3333 -u YourSiacoinAddress.YourWorkerName -i 28
+              </pre>
+              <pre>
+                ./sgminer --algorithm=sia --url=stratum+tcp://us-east.luxor.tech:3333 --userpass=YourSiacoinAddress.YourWorkerName -I 28
+              </pre>
+              <pre>
+                ./gominer -url stratum+tcp://us-east.luxor.tech:3333 -user YourSiacoinAddress.YourWorkerName
+              </pre>
+              <h4>Claymore</h4>
+              <pre>Please use port 7777 instead of 3333</pre>
+              <h4>Optional Regional Servers</h4>
+              <p>
+                Instead of using us-east, you can also use the following (please add the right port 3333 or 7777):
+              </p>
+              <pre>US West: us-west.luxor.tech</pre>
+              <pre>Europe: eu.luxor.tech</pre>
+              <pre>Asia: asia.luxor.tech</pre>
+            </div>
+            <div className='p-2 m-2 container text-center'>
+              Thanks for being a Luxor supporter!
+            </div>
+          </Padding>
         </div>
       )
     } else {
-      return <h1>Loading</h1>
+      return <div className='loading loading-lg' />
     }
   }
   mapStats = stats => {
@@ -78,7 +110,8 @@ class Landing extends React.Component {
         return (
           <tr key={m.address}>
             <td>{i + 1}</td>
-            <td><Link to={`/miner/${m.address}`}>{m.address}</Link></td>
+            {/* <td><Link to={`/miner/${m.address}`}>{m.address}</Link></td> */}
+            <td>{m.address}</td>
             <td>{m.hashrate / 1000000} MH/s</td>
             <td>{eff.toFixed(2)}%</td>
             <td>{moment.unix(time).fromNow()}</td>
@@ -91,6 +124,10 @@ class Landing extends React.Component {
 const Tables = styled.div`
 padding-top: 50px;
 padding-bottom: 100px;
+`
+
+const Padding = styled.div`
+  padding-bottom: 150px;
 `
 
 export default Landing
