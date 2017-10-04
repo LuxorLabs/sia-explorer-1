@@ -41,7 +41,6 @@ class MinerAddress extends Component {
   }
   render () {
     const { stats } = this.state
-    console.log(stats)
     const totalSharesFiveMin = this.state.loading
       ? 0
       : stats.stale_shares_five_min +
