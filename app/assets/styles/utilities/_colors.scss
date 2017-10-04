@@ -13,6 +13,8 @@
 
 @include text-color-variant(".text-error", $error-color);
 
+@include text-color-variant(".text-dark", $dark-color);
+
 // Background colors
 @include bg-color-variant(".bg-primary", $primary-color);
 

@@ -3,6 +3,23 @@ import Navigation from 'components/Navigation'
 import axios from 'axios'
 import calc from 'utils/calculations'
 import moment from 'moment'
+import Loading from 'components/Loading'
+import styled from 'styled-components'
+import WorkerRow from 'components/WorkerRow'
+import PayoutRow from 'components/PayoutRow'
+
+const AddressWrap = styled.div`
+  padding: 50px;
+  background: ${props => props.theme.dark_2};
+  margin-bottom: 50px;
+  #userAddress {
+    display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;    
+    text-overflow: ellipsis;
+  }
+`
 
 class MinerAddress extends Component {
   state = {
@@ -25,196 +42,355 @@ class MinerAddress extends Component {
   render () {
     const { stats } = this.state
     console.log(stats)
-    if (!this.state.loading) {
-      return (
-        <div className='container'>
-          <Navigation />
-          <div className='container grid-xl'>
-            <div className='columns'>
-              <div className='col-12 text-center p-2'>
-                <h6>{this.state.user}</h6>
-              </div>
-              <div className='col-4 col-md-12 p-2'>
-                <table className='table'>
-                  <thead>
-                    <tr>
-                      <th colSpan='2'>General Stats</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>Unpaid Balance</th>
-                      <td>{stats.balance} SC</td>
-                    </tr>
-                    <tr>
-                      <th>All-time Rewards</th>
-                      <td>{stats.total_payouts} SC</td>
-                    </tr>
-                    <tr>
-                      <th>All-time Hashes</th>
-                      <td>
-                        {calc.smartHashrate(stats.hashrate)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Blocks Found</th>
-                      <td>{stats.blocks_found}</td>
-                    </tr>
-                    <tr>
-                      <th>
-                        Last Share
-                      </th>
-                      <td>
-                        {moment(stats.last_share_time).fromNow()}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div className='col-8 col-md-12 p-2'>
-                <table className='table table-striped'>
-                  <thead>
-                    <tr>
-                      <th>Time</th>
-                      <th>Hash Rate</th>
-                      <th>Valid Shares</th>
-                      <th>Stale Shares</th>
-                      <th>Invalid Shares</th>
-                      <th>Rewards</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>5 minutes</th>
-                      <td>{calc.hashrateSince(30, stats.hashrate)}/s</td>
-                      <td>172,840,960</td>
-                      <td>0 (0.0%)</td>
-                      <td>1,466,368 (0.8%)</td>
-                      <td>2,468.26 SC</td>
-                    </tr>
-                    <tr>
-                      <th>15 minutes</th>
-                      <td>9,666 GH/s</td>
-                      <td>172,840,960</td>
-                      <td>0 (0.0%)</td>
-                      <td>1,466,368 (0.8%)</td>
-                      <td>2,468.26 SC</td>
-                    </tr>
-                    <tr>
-                      <th>60 minutes</th>
-                      <td>9,666 GH/s</td>
-                      <td>172,840,960</td>
-                      <td>0 (0.0%)</td>
-                      <td>1,466,368 (0.8%)</td>
-                      <td>2,468.26 SC</td>
-                    </tr>
-                    <tr>
-                      <th>6 hours</th>
-                      <td>9 666 GH/s</td>
-                      <td>172,840,960</td>
-                      <td>0 (0.0%)</td>
-                      <td>1,466,368 (0.8%)</td>
-                      <td>2,468.26 SC</td>
-                    </tr>
-                    <tr>
-                      <th>24 hours</th>
-                      <td>9,666 GH/s</td>
-                      <td>172,840,960</td>
-                      <td>0 (0.0%)</td>
-                      <td>1,466,368 (0.8%)</td>
-                      <td>2,468.26 SC</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div className='col-12 m-2 p-2'>
-                <h4>Miners</h4>
-                <table className='table'>
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Last Share</th>
-                      <th>5 minutes</th>
-                      <th>15 minutes</th>
-                      <th>1 hour</th>
-                      <th>6 hours</th>
-                      <th>24 hours</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>10Y001</td>
-                      <td>
-                        3 min ago
-                        <br />
-                        <small className='label'>Claymore Stratum</small>
-                      </td>
-                      <td>
-                        916MH/s
-                        {' '}
-                        <br />
-                        <small className='label'>0.0% stale</small>
-                      </td>
-                      <td>
-                        1200MH/s
-                        {' '}
-                        <br />
-                        <small className='label'>0.0% stale</small>
-                      </td>
-                      <td>
-                        126MH/s
-                        {' '}
-                        <br />
-                        <small className='label'>0.0% stale</small>
-                      </td>
-                      <td>
-                        1216MH/s
-                        {' '}
-                        <br />
-                        <small className='label'>0.0% stale</small>
-                      </td>
-                      <td>
-                        1816MH/s
-                        {' '}
-                        <br />
-                        <small className='label'>0.0% stale</small>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div className='col-12 m-2 p-2'>
-                <h4>Payouts</h4>
-                Payouts are performed daily with a minimum threshold of 500 SC, or up to every 6 hours when over 1000 SC.
-                <table className='table'>
-                  <thead>
-                    <tr>
-                      <th>Date/Time </th>
-                      <th>Amount</th>
-                      <th>Transaction ID</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>2017-09-23 17:25 UTC</td>
-                      <td>103,463.69 SC</td>
-                      <td>
-                        020b7024c42909f590bea997ef71e27931190bd9bf227899864e16ea498dc103
-                      </td>
-                      <td>confirmed</td>
-                    </tr>
-                  </tbody>
-                </table>
+    const totalSharesFiveMin = this.state.loading
+      ? 0
+      : stats.stale_shares_five_min +
+          stats.invalid_shares_five_min +
+          stats.valid_shares_five_min
+    const totalSharesFifteenMin = this.state.loading
+      ? 0
+      : stats.stale_shares_fifteen_min +
+          stats.invalid_shares_fifteen_min +
+          stats.valid_shares_fifteen_min
+    const totalSharesOneHour = this.state.loading
+      ? 0
+      : stats.stale_shares_one_hour +
+          stats.invalid_shares_one_hour +
+          stats.valid_shares_one_hour
+    const totalSharesSixHours = this.state.loading
+      ? 0
+      : stats.stale_shares_six_hour +
+          stats.invalid_shares_six_hour +
+          stats.valid_shares_six_hour
+    const totalSharesOneDay = this.state.loading
+      ? 0
+      : stats.stale_shares_one_day +
+          stats.invalid_shares_one_day +
+          stats.valid_shares_one_day
+
+    return (
+      <div>
+        <Navigation />
+        <div className='text-dark'>
+          {!this.state.loading
+            ? <div>
+              <AddressWrap>
+                <div className='text-center text-light'>
+                  <span id='userAddress'>{this.state.user}</span>
+                </div>
+              </AddressWrap>
+              <div className='container grid-xl'>
+                <div className='columns'>
+                  <div className='col-4 col-md-12 p-2'>
+                    <table className='table'>
+                      <thead>
+                        <tr>
+                          <th colSpan='2'>General Stats</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th>Unpaid Balance</th>
+                          <td>
+                            {calc.hastingsToSC(stats.balance).toFixed(2)} SC
+                            </td>
+                        </tr>
+                        <tr>
+                          <th>All-time Rewards</th>
+                          <td>
+                            {calc
+                                .hastingsToSC(stats.total_payouts)
+                                .toFixed(2)}
+                            {' '}
+                              SC
+                            </td>
+                        </tr>
+                        <tr>
+                          <th>All-time Hashes</th>
+                          <td>
+                            {calc.smartHashrate(
+                                calc.reduceHashrate(stats.hashrate)
+                              )}
+                          </td>
+                        </tr>
+                        <tr>
+                          <th>Blocks Found</th>
+                          <td>{stats.blocks_found}</td>
+                        </tr>
+                        <tr>
+                          <th>
+                              Last Share
+                            </th>
+                          <td>
+                            {moment(stats.last_share_time).fromNow()}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className='col-8 col-md-12 p-2'>
+                    <table className='table table-striped'>
+                      <thead>
+                        <tr>
+                          <th>Time</th>
+                          <th>Hash Rate</th>
+                          <th>Valid Shares</th>
+                          <th>Stale Shares</th>
+                          <th>Invalid Shares</th>
+                          <th>Rewards</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th>5 minutes</th>
+                          <td>{calc.hashrateSince(5, stats.hashrate)}/s</td>
+                          <td>
+                            {calc.numberWithCommas(
+                                stats.valid_shares_five_min
+                              )}
+                          </td>
+                          <td>
+                            {calc.numberWithCommas(
+                                stats.stale_shares_five_min
+                              )}
+                            {' '}
+                              (
+                              {(stats.stale_shares_five_min /
+                                totalSharesFiveMin).toFixed(1)}
+                              %)
+                            </td>
+                          <td>
+                            {calc.numberWithCommas(
+                                stats.invalid_shares_five_min
+                              )}
+                            {' '}
+                              (
+                              {(stats.invalid_shares_five_min /
+                                totalSharesFiveMin).toFixed(1)}
+                              %)
+                            </td>
+                          <td>
+                            {calc
+                                .hastingsToSC(stats.payouts_five_min)
+                                .toFixed(2)}
+                            {' '}
+                              SC
+                            </td>
+                        </tr>
+                        <tr>
+                          <th>15 minutes</th>
+                          <td>{calc.hashrateSince(15, stats.hashrate)}/s</td>
+                          <td>
+                            {calc.numberWithCommas(
+                                stats.valid_shares_fifteen_min
+                              )}
+                          </td>
+                          <td>
+                            {calc.numberWithCommas(
+                                stats.stale_shares_fifteen_min
+                              )}
+                            {' '}
+                              (
+                              {(stats.stale_shares_fifteen_min /
+                                totalSharesFifteenMin).toFixed(1)}
+                              %)
+                            </td>
+                          <td>
+                            {calc.numberWithCommas(
+                                stats.invalid_shares_fifteen_min
+                              )}
+                            {' '}
+                              (
+                              {(stats.invalid_shares_fifteen_min /
+                                totalSharesFifteenMin).toFixed(1)}
+                              %)
+                            </td>
+                          <td>
+                            {calc
+                                .hastingsToSC(stats.payouts_fifteen_min)
+                                .toFixed(2)}
+                            {' '}
+                              SC
+                            </td>
+                        </tr>
+                        <tr>
+                          <th>60 minutes</th>
+                          <td>{calc.hashrateSince(60, stats.hashrate)}/s</td>
+                          <td>
+                            {calc.numberWithCommas(
+                                stats.valid_shares_one_hour
+                              )}
+                          </td>
+                          <td>
+                            {calc.numberWithCommas(
+                                stats.stale_shares_one_hour
+                              )}
+                            {' '}
+                              (
+                              {(stats.stale_shares_one_hour /
+                                totalSharesOneHour).toFixed(1)}
+                              %)
+                            </td>
+                          <td>
+                            {calc.numberWithCommas(
+                                stats.invalid_shares_one_hour
+                              )}
+                            {' '}
+                              (
+                              {(stats.invalid_shares_one_hour /
+                                totalSharesOneHour).toFixed(1)}
+                              %)
+                            </td>
+                          <td>
+                            {calc
+                                .hastingsToSC(stats.payouts_one_hour)
+                                .toFixed(2)}
+                            {' '}
+                              SC
+                            </td>
+                        </tr>
+                        <tr>
+                          <th>6 hours</th>
+                          <td>{calc.hashrateSince(360, stats.hashrate)}/s</td>
+                          <td>
+                            {calc.numberWithCommas(
+                                stats.valid_shares_six_hour
+                              )}
+                          </td>
+                          <td>
+                            {calc.numberWithCommas(
+                                stats.stale_shares_six_hour
+                              )}
+                            {' '}
+                              (
+                              {(stats.stale_shares_six_hour /
+                                totalSharesSixHours).toFixed(1)}
+                              %)
+                            </td>
+                          <td>
+                            {calc.numberWithCommas(
+                                stats.invalid_shares_six_hour
+                              )}
+                            {' '}
+                              (
+                              {(stats.invalid_shares_six_hour /
+                                totalSharesSixHours).toFixed(1)}
+                              %)
+                            </td>
+                          <td>
+                            {calc
+                                .hastingsToSC(stats.payouts_six_hour)
+                                .toFixed(2)}
+                            {' '}
+                              SC
+                            </td>
+                        </tr>
+                        <tr>
+                          <th>24 hours</th>
+                          <td>
+                            {calc.hashrateSince(1440, stats.hashrate)}/s
+                            </td>
+                          <td>
+                            {calc.numberWithCommas(
+                                stats.valid_shares_one_day
+                              )}
+                          </td>
+                          <td>
+                            {calc.numberWithCommas(
+                                stats.stale_shares_one_day
+                              )}
+                            {' '}
+                              (
+                              {(stats.stale_shares_one_day /
+                                totalSharesOneDay).toFixed(1)}
+                              %)
+                            </td>
+                          <td>
+                            {calc.numberWithCommas(
+                                stats.invalid_shares_one_day
+                              )}
+                            {' '}
+                              (
+                              {(stats.invalid_shares_one_day /
+                                totalSharesOneDay).toFixed(1)}
+                              %)
+                            </td>
+                          <td>
+                            {calc
+                                .hastingsToSC(stats.payouts_one_day)
+                                .toFixed(2)}
+                            {' '}
+                              SC
+                            </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className='col-12 m-2 p-2'>
+                    <HeaderWrap>
+                      <h4>Miners</h4>
+                    </HeaderWrap>
+                    <table className='table'>
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Last Share</th>
+                          <th>5 minutes</th>
+                          <th>15 minutes</th>
+                          <th>1 hour</th>
+                          <th>6 hours</th>
+                          <th>24 hours</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {this.mapWorkers()}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className='col-12 m-2 p-2'>
+                    <HeaderWrap>
+                      <h4>Payouts</h4>
+                      <span>
+                          Payouts are performed daily with a minimum threshold of 500 SC, or up to every 6 hours when over 1000 SC.
+                        </span>
+                    </HeaderWrap>
+                    <table className='table'>
+                      <thead>
+                        <tr>
+                          <th>Date/Time </th>
+                          <th>Amount</th>
+                          <th colSpan={2}>Transaction ID</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {this.mapPayouts()}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+            : <Loading />}
         </div>
-      )
-    } else {
-      return <h1>Loading</h1>
-    }
+      </div>
+    )
+  }
+  mapWorkers = () => {
+    return this.state.stats.miners.map((m, i) => (
+      <WorkerRow key={i} miner={m} />
+    ))
+  }
+  mapPayouts = () => {
+    return this.state.stats.payouts.map((p, i) => (
+      <PayoutRow key={i} payout={p} />
+    ))
   }
 }
+
+const HeaderWrap = styled.div`
+  padding-bottom: 20px;
+  padding-top: 50px;
+`
 
 export default MinerAddress

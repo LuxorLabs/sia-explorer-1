@@ -3,84 +3,88 @@ import styled from 'styled-components'
 import { inject, observer } from 'mobx-react'
 import 'styles/spectre.scss'
 import axios from 'axios'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Navigation from 'components/Navigation'
+import Loading from 'components/Loading'
 import moment from 'moment'
+import Button from 'components/Buttons'
+import calc from 'utils/calculations'
+
+const Hero = styled.div`
+  background: ${props => props.theme.dark_3};
+  padding: 3rem;
+  h5 {
+    margin-bottom: 2rem;
+  }
+  button {
+    margin: 0.5rem;
+  }
+`
 
 @inject('mainStore')
 @observer
 class Landing extends React.Component {
   componentWillMount () {
-    setInterval(() => {
-      axios.get('/api/stats').then(({ data }) => {
-        this.props.mainStore.stats = data
-      })
-    }, 5000)
+    axios.get('/api/stats').then(({ data }) => {
+      this.props.mainStore.stats = data
+    })
   }
   render () {
     const { stats } = this.props.mainStore
-    if (stats && stats.users) {
-      return (
-        <div className='container'>
-          <Navigation />
-          <div className='h6 text-center'>
-            Blocks Found: {this.props.mainStore.stats.block_stats.length}
+    return (
+      <div>
+        <Navigation />
+        <Hero>
+          <div className='container grid-xl text-center'>
+            <h2>Hello Miners</h2>
+            <h5>
+              Welcome to a
+              {' '}
+              <u>lightweight</u>
+              ,
+              {' '}
+              <u>fair</u>
+              , and
+              {' '}
+              <u>fast</u>
+              {' '}
+              mining pool for Sia.
+            </h5>
+            <a
+              className='btn btn-lg btn-primary'
+              target='_blank'
+              href='https://medium.com/@nitronick600/31b8cb83e21f'
+            >
+              Learn more
+            </a>
           </div>
-          <Tables>
-            <div className='container grid-xl text-center'>
-              <table className='table table-striped table-hover'>
+        </Hero>
+        <Tables>
+          <div className='container grid-xl text-center'>
+            {stats && stats.users
+              ? <table className='table table-striped table-hover'>
                 <thead>
                   <tr>
                     <th>Rank</th>
-                    <th>Address</th>
+                    <th colSpan={5}>Address</th>
                     <th>Hashrate</th>
                     <th>Efficiency</th>
-                    <th>Last Active</th>
+                    <th colSpan={2}>Last Active</th>
                   </tr>
                 </thead>
                 <tbody>
                   {this.mapStats(stats)}
                 </tbody>
               </table>
-            </div>
-          </Tables>
-          <Padding>
-            <div className='m-2 p2 text-center'>
-              <h4>Get Started</h4>
-              <pre>
-                ./marlin -H us-east.luxor.tech:3333 -u YourSiacoinAddress.YourWorkerName -I 28
-              </pre>
-              <pre>
-                ./ccminer -a sia -e --url=stratum+tcp://us-east.luxor.tech:3333 -u YourSiacoinAddress.YourWorkerName -i 28
-              </pre>
-              <pre>
-                ./sgminer --algorithm=sia --url=stratum+tcp://us-east.luxor.tech:3333 --userpass=YourSiacoinAddress.YourWorkerName -I 28
-              </pre>
-              <pre>
-                ./gominer -url stratum+tcp://us-east.luxor.tech:3333 -user YourSiacoinAddress.YourWorkerName
-              </pre>
-              <h4>Claymore</h4>
-              <pre>Please use port 7777 instead of 3333</pre>
-              <h4>Optional Regional Servers</h4>
-              <p>
-                Instead of using us-east, you can also use the following (please add the right port 3333 or 7777):
-              </p>
-              <pre>US West: us-west.luxor.tech</pre>
-              <pre>Europe: eu.luxor.tech</pre>
-              <pre>Asia: asia.luxor.tech</pre>
-            </div>
-            <div className='p-2 m-2 container text-center'>
-              Thanks for being a Luxor supporter!
-            </div>
-          </Padding>
-        </div>
-      )
-    } else {
-      return <div className='loading loading-lg' />
-    }
+              : <Loading />}
+          </div>
+        </Tables>
+      </div>
+    )
   }
   mapStats = stats => {
     return stats.users
+      .slice(0, 20)
       .sort((a, b) => {
         return b.hashrate - a.hashrate
       })
@@ -95,11 +99,14 @@ class Landing extends React.Component {
         return (
           <tr key={m.address}>
             <td>{i + 1}</td>
-            {/* <td><Link to={`/miner/${m.address}`}>{m.address}</Link></td> */}
-            <td>{m.address}</td>
-            <td>{m.hashrate / 1000000} MH/s</td>
+            <td colSpan={5}>
+              <Link to={`/miner/${m.address}`}>{m.address}</Link>
+            </td>
+            <td>{calc.smartHashrate(m.hashrate)}/s</td>
             <td>{eff.toFixed(2)}%</td>
-            <td>{time === 0 ? 'Never' : moment.unix(time).fromNow()}</td>
+            <td colSpan={2}>
+              {time === 0 ? 'Never' : moment.unix(time).fromNow()}
+            </td>
           </tr>
         )
       })
@@ -109,10 +116,6 @@ class Landing extends React.Component {
 const Tables = styled.div`
 padding-top: 50px;
 padding-bottom: 100px;
-`
-
-const Padding = styled.div`
-  padding-bottom: 150px;
 `
 
 export default Landing
