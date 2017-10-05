@@ -46,6 +46,7 @@ class Navigation extends Component {
                 target='_blank'
                 href='https://twitter.com/LuxorTechTeam'
                 className='btn btn-link'
+                style={{ color: '#FFFFFF' }}
               >
                 Twitter
               </a>
@@ -53,6 +54,7 @@ class Navigation extends Component {
                 target='_blank'
                 href='https://github.com/LuxorLabs'
                 className='btn btn-link'
+                style={{ color: '#FFFFFF' }}
               >
                 GitHub
               </a>

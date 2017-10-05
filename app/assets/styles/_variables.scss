@@ -38,7 +38,7 @@ $body-font-color: $light-color;
 
 // Fonts
 // Credit: https://www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide/
-$base-font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto;
+$base-font-family: "Interface Regular", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto;
 $mono-font-family: "SF Mono", "Segoe UI Mono", "Roboto Mono", Menlo, Courier, monospace;
 $fallback-font-family: "Helvetica Neue", sans-serif;
 $cjk-zh-font-family: $base-font-family, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", $fallback-font-family;

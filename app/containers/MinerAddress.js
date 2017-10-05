@@ -27,8 +27,6 @@ const AddressWrap = styled.div`
 
 const ChartWrap = styled.div`
   padding-bottom: 50px;
-  padding-left: 1rem;
-  padding-right: 1rem;
 `
 
 const StatsWrap = styled.div`

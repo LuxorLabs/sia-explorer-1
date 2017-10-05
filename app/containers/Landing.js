@@ -9,6 +9,7 @@ import Loading from 'components/Loading'
 import moment from 'moment'
 import calc from 'utils/calculations'
 import Button from 'components/Buttons'
+import heroSvg from 'assets/img/hero.svg'
 
 const Hero = styled.div`
   background: ${props => props.theme.dark_3};
@@ -21,6 +22,13 @@ const Hero = styled.div`
   }
 `
 
+const HeroSvg = styled.div`
+  height: 200px;
+  margin: 2rem auto;
+  object {
+    height: 100%;
+  }
+`
 @inject('mainStore')
 @observer
 class Landing extends React.Component {
@@ -52,6 +60,9 @@ class Landing extends React.Component {
         <Navigation />
         <Hero>
           <div className='container grid-xl text-center'>
+            <HeroSvg>
+              <object data={heroSvg} type='' />
+            </HeroSvg>
             <h2>Hello Miners, we're hashing at <b>{total}/s</b></h2>
             <h5>
               Welcome to a

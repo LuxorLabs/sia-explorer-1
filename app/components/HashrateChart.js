@@ -5,7 +5,7 @@ HighchartsExporting(ReactHighcharts.Highcharts)
 
 const theme = {
   colors: [
-    '#2b908f',
+    '#252423',
     '#90ee7e',
     '#f45b5b',
     '#7798BF',
@@ -240,9 +240,9 @@ class HashrateChart extends Component {
         area: {
           fillColor: {
             linearGradient: {
-              x1: 0,
-              y1: 0,
-              x2: 0,
+              x1: 1,
+              y1: 1,
+              x2: 1,
               y2: 1
             },
             stops: [
@@ -271,7 +271,7 @@ class HashrateChart extends Component {
 
       series: [
         {
-          type: 'area',
+          type: 'spline',
           name: 'Hashes per Second',
           data: data
         }
