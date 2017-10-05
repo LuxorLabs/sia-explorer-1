@@ -9,6 +9,7 @@ import WorkerRow from 'components/WorkerRow'
 import PayoutRow from 'components/PayoutRow'
 import GeneralStatsTable from 'components/GeneralStatsTable'
 import ShareScheduleTable from 'components/ShareScheduleTable'
+import HashrateChart from 'components/HashrateChart'
 
 const AddressWrap = styled.div`
   padding: 50px;
@@ -21,6 +22,12 @@ const AddressWrap = styled.div`
     overflow: hidden;    
     text-overflow: ellipsis;
   }
+`
+
+const ChartWrap = styled.div`
+  padding-bottom: 50px;
+  padding-left: 1rem;
+  padding-right: 1rem;
 `
 
 class MinerAddress extends Component {
@@ -43,7 +50,6 @@ class MinerAddress extends Component {
   }
   render () {
     const { stats } = this.state
-    console.log(stats)
     return (
       <div>
         <Navigation />
@@ -57,6 +63,9 @@ class MinerAddress extends Component {
               </AddressWrap>
               <div className='container grid-xl'>
                 <div className='columns'>
+                  <ChartWrap className='col-12'>
+                    <HashrateChart data={stats.hashrate} />
+                  </ChartWrap>
                   <div className='col-4 col-md-12 p-2'>
                     <GeneralStatsTable stats={stats} />
                   </div>
