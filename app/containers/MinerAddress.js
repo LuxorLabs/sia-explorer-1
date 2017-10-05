@@ -121,7 +121,7 @@ class MinerAddress extends Component {
                               Last Share
                             </th>
                           <td>
-                            {moment(stats.last_share_time).fromNow()}
+                            {moment.unix(stats.last_share_time).fromNow()}
                           </td>
                         </tr>
                       </tbody>
