@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 import Navigation from 'components/Navigation'
 import Loading from 'components/Loading'
 import moment from 'moment'
-import Button from 'components/Buttons'
 import calc from 'utils/calculations'
 
 const Hero = styled.div`
@@ -31,12 +30,15 @@ class Landing extends React.Component {
   }
   render () {
     const { stats } = this.props.mainStore
+    var total = stats && stats.users ? calc.smartHashrate(stats.users.reduce((a, b) => {
+      return a + b.hashrate
+    }, 0)) : 0.0
     return (
       <div>
         <Navigation />
         <Hero>
           <div className='container grid-xl text-center'>
-            <h2>Hello Miners</h2>
+            <h2>Hello Miners, we're hashing at <b>{total}/s</b></h2>
             <h5>
               Welcome to a
               {' '}
