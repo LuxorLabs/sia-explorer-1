@@ -24,6 +24,15 @@ const Hero = styled.div`
 @observer
 class Landing extends React.Component {
   componentWillMount () {
+    this.fetchStats()
+    this.setPolling = setInterval(() => {
+      this.fetchStats()
+    }, 10000)
+  }
+  componentWillUnmount () {
+    clearInterval(this.setPolling)
+  }
+  fetchStats = () => {
     axios.get('/api/stats').then(({ data }) => {
       this.props.mainStore.stats = data
     })
