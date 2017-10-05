@@ -58,6 +58,16 @@ class Navigation extends Component {
               >
                 GitHub
               </a>
+              <span
+                className='label label-rounded label-primary'
+                style={{ color: '#FFFFFF', marginLeft: '10px' }}
+              >
+                Blocks Found:
+                {' '}
+                {this.props.mainStore.stats.block_stats
+                  ? this.props.mainStore.stats.block_stats.length
+                  : 0}
+              </span>
             </section>
           </header>
         </div>

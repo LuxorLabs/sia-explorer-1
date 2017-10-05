@@ -3,11 +3,12 @@
   @include label-base();
   @include label-variant(lighten($body-font-color, 5%), $bg-color);
   display: inline-block;
-
+  padding-top: .3rem;
+  padding-bottom: .3rem;
   &.label-rounded {
     border-radius: 5rem;
-    padding-left: .4rem;
-    padding-right: .4rem; 
+    padding-left: .5rem;
+    padding-right: .5rem; 
   }
 
   &.label-primary {
