@@ -5,4 +5,8 @@ const Button = ({ text, ...rest }) => {
   return <Link className='btn btn-lg btn-primary' {...rest}>{text}</Link>
 }
 
+export const ButtonSmall = ({ text, ...rest }) => {
+  return <Link className='btn btn-primary' {...rest}>{text}</Link>
+}
+
 export default Button

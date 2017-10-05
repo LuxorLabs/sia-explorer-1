@@ -8,6 +8,7 @@ import Navigation from 'components/Navigation'
 import Loading from 'components/Loading'
 import moment from 'moment'
 import calc from 'utils/calculations'
+import Button from 'components/Buttons'
 
 const Hero = styled.div`
   background: ${props => props.theme.dark_3};
@@ -15,7 +16,7 @@ const Hero = styled.div`
   h5 {
     margin-bottom: 2rem;
   }
-  button {
+  .btn {
     margin: 0.5rem;
   }
 `
@@ -72,6 +73,7 @@ class Landing extends React.Component {
             >
               Learn more
             </a>
+            <Button to='/setup' text='Get Started' />
           </div>
         </Hero>
         <Tables>

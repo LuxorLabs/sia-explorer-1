@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Landing from 'containers/Landing'
 import MinerAddress from 'containers/MinerAddress'
+import Setup from 'containers/Setup'
 
 import { Provider } from 'mobx-react'
 import { MainStore } from 'stores/MainStore'
@@ -31,6 +32,7 @@ class App extends React.Component {
             <MainContainer className='app'>
               <Route exact path='/' component={Landing} />
               <Route exact path='/miner/:address' component={MinerAddress} />
+              <Route exact path='/setup' component={Setup} />
             </MainContainer>
           </Router>
         </ThemeProvider>

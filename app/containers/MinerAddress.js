@@ -10,6 +10,7 @@ import PayoutRow from 'components/PayoutRow'
 import GeneralStatsTable from 'components/GeneralStatsTable'
 import ShareScheduleTable from 'components/ShareScheduleTable'
 import HashrateChart from 'components/HashrateChart'
+import { inject, observer } from 'mobx-react'
 
 const AddressWrap = styled.div`
   padding: 50px;
@@ -34,6 +35,8 @@ const StatsWrap = styled.div`
   padding-bottom: 50px;
 `
 
+@inject('mainStore')
+@observer
 class MinerAddress extends Component {
   state = {
     user: 'null',
@@ -51,6 +54,9 @@ class MinerAddress extends Component {
         stats: data
       })
     })
+  }
+  componentDidMount () {
+    this.props.mainStore.address = ''
   }
   render () {
     const { stats } = this.state
