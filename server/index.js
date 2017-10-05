@@ -47,7 +47,7 @@ detect(DEFAULT_PORT).then(port => {
       }
     })
   } else {
-    console.log(chalk.red(`Something is already running on port ${DEFAULT_PORT}`))
+    run(port)
   }
 })
 // Start your app.
