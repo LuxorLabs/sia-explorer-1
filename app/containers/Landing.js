@@ -30,9 +30,13 @@ class Landing extends React.Component {
   }
   render () {
     const { stats } = this.props.mainStore
-    var total = stats && stats.users ? calc.smartHashrate(stats.users.reduce((a, b) => {
-      return a + b.hashrate
-    }, 0)) : 0.0
+    var total = stats && stats.users
+      ? calc.smartHashrate(
+          stats.users.reduce((a, b) => {
+            return a + b.hashrate
+          }, 0)
+        )
+      : 0.0
     return (
       <div>
         <Navigation />
@@ -86,10 +90,10 @@ class Landing extends React.Component {
   }
   mapStats = stats => {
     return stats.users
-      .slice(0, 20)
       .sort((a, b) => {
         return b.hashrate - a.hashrate
       })
+      .slice(0, 20)
       .map((m, i) => {
         const time = m.miners && m.miners.length > 0
           ? m.miners.map(w => w.last_beat).reduce((c, a) => (c > a ? c : a))

@@ -5,6 +5,7 @@ import moment from 'moment'
 class WorkerRow extends Component {
   render () {
     const { miner } = this.props
+    console.log(miner)
     return (
       <tr>
         <td>
@@ -19,7 +20,7 @@ class WorkerRow extends Component {
           {moment(miner.time).fromNow()}
           <br />
           <small className='label label-primary'>
-            Stratum
+            {miner.miner_type ? miner.miner_type : 'Unknown'}
           </small>
         </td>
         <td>
