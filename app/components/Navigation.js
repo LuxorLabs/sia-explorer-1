@@ -12,19 +12,10 @@ const Nav = styled.div`
 @inject('mainStore')
 @observer
 class Navigation extends Component {
-  state = {
-    redirect: false
-  }
   handleChange = e => {
     this.props.mainStore.address = e.target.value
   }
-  handleKeyPress = e => {
-    if (e.key === 'Enter') {
-      this.setState({
-        redirect: true
-      })
-    }
-  }
+
   render () {
     return (
       <Nav>
@@ -44,8 +35,6 @@ class Navigation extends Component {
                 onChange={this.handleChange}
                 onKeyPress={this.handleKeyPress}
               />
-              {this.state.redirect &&
-                <Redirect to={`/miner/${this.props.mainStore.address}`} />}
               <ButtonSmall
                 style={{ marginLeft: '0.8rem' }}
                 to={`/miner/${this.props.mainStore.address}`}

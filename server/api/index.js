@@ -3,7 +3,7 @@ const router = require('express').Router()
 
 const luxor = axios.create({
   baseURL: 'http://api.luxor.tech:8082',
-  timeout: 10000
+  timeout: 2000
 })
 
 router.get('/stats', (req, res) => {
@@ -25,7 +25,7 @@ router.get('/user/:address', (req, res) => {
       res.send(data)
     })
     .catch(err => {
-      console.log(err)
+      res.send({ message: 'Not found' })
     })
 })
 

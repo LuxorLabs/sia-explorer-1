@@ -35,24 +35,64 @@ const StatsWrap = styled.div`
   padding-bottom: 50px;
 `
 
+const EmptyStateWrap = styled.div`
+  height: calc(100vh - 100px);
+  .empty {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+`
+
 @inject('mainStore')
 @observer
 class MinerAddress extends Component {
   state = {
     user: 'null',
     stats: null,
-    loading: true
+    loading: true,
+    found: false
   }
   componentWillMount () {
     const user = this.props.match.params.address
     this.setState({
       user
     })
-    axios.get(`/api/user/${user}`).then(({ data }) => {
-      this.setState({
-        loading: false,
-        stats: data
-      })
+    axios.get(`/api/user/${user}`).then(({ data, ...res }) => {
+      if (data && data.message) {
+        this.setState({
+          loading: false,
+          found: false
+        })
+      } else {
+        this.setState({
+          loading: false,
+          stats: data,
+          found: true
+        })
+      }
+    })
+  }
+  componentWillReceiveProps (nextProps) {
+    const user = nextProps.match.params.address
+    this.setState({
+      user
+    })
+    axios.get(`/api/user/${user}`).then(({ data, ...res }) => {
+      if (data && data.message) {
+        this.setState({
+          loading: false,
+          found: false
+        })
+      } else {
+        this.setState({
+          loading: false,
+          stats: data,
+          found: true
+        })
+      }
     })
   }
   componentDidMount () {
@@ -60,90 +100,106 @@ class MinerAddress extends Component {
   }
   render () {
     const { stats } = this.state
-    return (
-      <div>
-        <Navigation />
-        <div className='text-dark'>
-          {!this.state.loading
-            ? <StatsWrap>
-              <AddressWrap>
-                <div className='text-center text-light'>
-                  <span id='userAddress'>{this.state.user}</span>
-                </div>
-              </AddressWrap>
-              <div className='container grid-xl'>
-                <div className='columns'>
-                  <ChartWrap className='col-12'>
-                    <HashrateChart data={stats.hashrate} />
-                  </ChartWrap>
-                  <div className='col-4 col-md-12 p-2'>
-                    <GeneralStatsTable stats={stats} />
+    if ((this.state.loading && !this.state.found) || this.state.found) {
+      return (
+        <div>
+          <Navigation />
+          <div className='text-dark'>
+            {!this.state.loading
+              ? <StatsWrap>
+                <AddressWrap>
+                  <div className='text-center text-light'>
+                    <span id='userAddress'>{this.state.user}</span>
                   </div>
-                  <div className='col-8 col-md-12 p-2'>
-                    <ShareScheduleTable stats={stats} />
-                  </div>
-                  <div className='col-12 m-2 p-2'>
-                    <HeaderWrap>
-                      <h4>Miners</h4>
-                    </HeaderWrap>
-                    <table className='table'>
-                      <thead>
-                        <tr>
-                          <th>Name</th>
-                          <th>Last Share</th>
-                          <th>5 minutes</th>
-                          <th>15 minutes</th>
-                          <th>1 hour</th>
-                          <th>6 hours</th>
-                          <th>24 hours</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {this.mapWorkers()}
-                      </tbody>
-                    </table>
-                  </div>
-                  <div className='col-12 m-2 p-2'>
-                    <HeaderWrap>
-                      <h4>Payouts</h4>
-                      <span>
-                          Payouts are performed daily with a minimum threshold of 500 SC, or up to every 6 hours when over 1000 SC.
-                        </span>
-                    </HeaderWrap>
+                </AddressWrap>
+                <div className='container grid-xl'>
+                  <div className='columns'>
+                    <ChartWrap className='col-12'>
+                      <HashrateChart data={stats.hashrate} />
+                    </ChartWrap>
+                    <div className='col-4 col-md-12 p-2'>
+                      <GeneralStatsTable stats={stats} />
+                    </div>
+                    <div className='col-8 col-md-12 p-2'>
+                      <ShareScheduleTable stats={stats} />
+                    </div>
+                    <div className='col-12 m-2 p-2'>
+                      <HeaderWrap>
+                        <h4>Miners</h4>
+                      </HeaderWrap>
+                      <table className='table'>
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Last Share</th>
+                            <th>5 minutes</th>
+                            <th>15 minutes</th>
+                            <th>1 hour</th>
+                            <th>6 hours</th>
+                            <th>24 hours</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {this.mapWorkers()}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div className='col-12 m-2 p-2'>
+                      <HeaderWrap>
+                        <h4>Payouts</h4>
+                        <span>
+                            Payouts are performed daily with a minimum threshold of 500 SC, or up to every 6 hours when over 1000 SC.
+                          </span>
+                      </HeaderWrap>
 
-                    {this.state.stats.payouts.length > 0
-                        ? <table className='table bg-primary'>
-                          <thead>
-                            <tr>
-                              <th>Date/Time </th>
-                              <th>Amount</th>
-                              <th colSpan={2}>Transaction ID</th>
-                              <th>Status</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {this.mapPayouts()}
-                          </tbody>
-                        </table>
-                        : <div className='empty'>
-                          <div className='empty-icon'>
-                            <i className='icon icon-people' />
-                          </div>
-                          <p className='empty-title h5'>
-                              You have no payouts just yet!
-                            </p>
-                          <p className='empty-subtitle'>
-                              Note that the minimum payout is currently set at 500SC.
-                            </p>
-                        </div>}
+                      {this.state.stats.payouts.length > 0
+                          ? <table className='table bg-primary'>
+                            <thead>
+                              <tr>
+                                <th>Date/Time </th>
+                                <th>Amount</th>
+                                <th colSpan={2}>Transaction ID</th>
+                                <th>Status</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {this.mapPayouts()}
+                            </tbody>
+                          </table>
+                          : <div className='empty'>
+                            <div className='empty-icon'>
+                              <i className='icon icon-people' />
+                            </div>
+                            <p className='empty-title h5'>
+                                You have no payouts just yet!
+                              </p>
+                            <p className='empty-subtitle'>
+                                Note that the minimum payout is currently set at 500SC.
+                              </p>
+                          </div>}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </StatsWrap>
-            : <Loading />}
+              </StatsWrap>
+              : <Loading />}
+          </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div>
+          <Navigation />
+          <EmptyStateWrap>
+            <div className='empty'>
+              <p className='empty-title h5'>Address not found.</p>
+              <p className='empty-subtitle'>
+                Are you sure you typed in the right address?
+              </p>
+            </div>
+          </EmptyStateWrap>
+        </div>
+      )
+    }
   }
   mapWorkers = () => {
     return this.state.stats.miners.map((m, i) => (
