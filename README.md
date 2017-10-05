@@ -8,6 +8,7 @@ Feel free to look at the code, but I wouldn't recommend it for production use.
 - MobX
 - NodeJS
 - Express
+- And More!
 
 ##Install:
 Make sure you have Yarn installed.
