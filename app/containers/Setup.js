@@ -170,12 +170,12 @@ class Setup extends Component {
                 <Section>
                   <h3>Compatible Miners</h3>
                   <span className='label red'>AMD</span>
-                  <span className='label green'>Nvidea</span>
+                  <span className='label green'>Nvidia</span>
                   <h5>Marlin</h5>
                   <p>
-                    <a href='https://siamine.com/marlin'>Download Here</a>
+                    <a href='https://siamine.com/marlin'>Windows/Linux</a>
                   </p>
-                  <span className='label green'>Nvidea</span>
+                  <span className='label green'>Nvidia</span>
                   <h5>CCMiner</h5>
                   <p>
                     <a href='https://github.com/KlausT/ccminer/releases/tag/8.00'>

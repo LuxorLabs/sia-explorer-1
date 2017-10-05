@@ -88,7 +88,8 @@ class Landing extends React.Component {
           </div>
         </Hero>
         <Tables>
-          <div className='container grid-xl text-center'>
+          <div className='container grid-xl text-dark'>
+            <p>Our Top Miners</p>
             {stats && stats.users
               ? <table className='table table-striped table-hover'>
                 <thead>
