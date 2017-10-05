@@ -30,6 +30,10 @@ const ChartWrap = styled.div`
   padding-right: 1rem;
 `
 
+const StatsWrap = styled.div`
+  padding-bottom: 50px;
+`
+
 class MinerAddress extends Component {
   state = {
     user: 'null',
@@ -55,7 +59,7 @@ class MinerAddress extends Component {
         <Navigation />
         <div className='text-dark'>
           {!this.state.loading
-            ? <div>
+            ? <StatsWrap>
               <AddressWrap>
                 <div className='text-center text-light'>
                   <span id='userAddress'>{this.state.user}</span>
@@ -100,23 +104,36 @@ class MinerAddress extends Component {
                           Payouts are performed daily with a minimum threshold of 500 SC, or up to every 6 hours when over 1000 SC.
                         </span>
                     </HeaderWrap>
-                    <table className='table'>
-                      <thead>
-                        <tr>
-                          <th>Date/Time </th>
-                          <th>Amount</th>
-                          <th colSpan={2}>Transaction ID</th>
-                          <th>Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {this.mapPayouts()}
-                      </tbody>
-                    </table>
+
+                    {this.state.stats.payouts.length > 0
+                        ? <table className='table bg-primary'>
+                          <thead>
+                            <tr>
+                              <th>Date/Time </th>
+                              <th>Amount</th>
+                              <th colSpan={2}>Transaction ID</th>
+                              <th>Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {this.mapPayouts()}
+                          </tbody>
+                        </table>
+                        : <div className='empty'>
+                          <div className='empty-icon'>
+                            <i className='icon icon-people' />
+                          </div>
+                          <p className='empty-title h5'>
+                              You have no payouts just yet!
+                            </p>
+                          <p className='empty-subtitle'>
+                              Note that the minimum payout is currently set at 500SC.
+                            </p>
+                        </div>}
                   </div>
                 </div>
               </div>
-            </div>
+            </StatsWrap>
             : <Loading />}
         </div>
       </div>

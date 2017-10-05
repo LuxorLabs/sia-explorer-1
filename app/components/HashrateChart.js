@@ -20,19 +20,19 @@ const theme = {
   chart: {
     backgroundColor: {
       linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
-      stops: [[0, '#2a2a2b'], [1, '#3e3e40']]
+      stops: [[0, '#FDF1BF'], [1, '#FDF1BF']]
     },
     plotBorderColor: '#606063'
   },
   title: {
     style: {
-      color: '#FFFFFF',
-      fontSize: '20px'
+      color: '#252423',
+      fontSize: '18px'
     }
   },
   subtitle: {
     style: {
-      color: '#E0E0E3',
+      color: '#252423',
       textTransform: 'uppercase'
     }
   },
@@ -40,7 +40,7 @@ const theme = {
     gridLineColor: '#707073',
     labels: {
       style: {
-        color: '#E0E0E3'
+        color: '#252423'
       }
     },
     lineColor: '#707073',
@@ -56,7 +56,7 @@ const theme = {
     gridLineColor: '#707073',
     labels: {
       style: {
-        color: '#E0E0E3'
+        color: '#252423'
       }
     },
     lineColor: '#707073',
@@ -65,7 +65,7 @@ const theme = {
     tickWidth: 1,
     title: {
       style: {
-        color: '#A0A0A3'
+        color: '#252423'
       }
     }
   },
