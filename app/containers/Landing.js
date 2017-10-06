@@ -70,7 +70,7 @@ class Landing extends React.Component {
             <TitleWrap>
               <h2>Hi miners, we're hashing at <b>{total}/s.</b></h2>
               <h6>
-                Meanwhile, welcome to the first mining pool that gives back.
+                Welcome to the first mining pool that gives back.
               </h6>
             </TitleWrap>
             <a
