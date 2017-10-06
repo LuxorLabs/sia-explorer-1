@@ -12,6 +12,10 @@ import ShareScheduleTable from 'components/ShareScheduleTable'
 import HashrateChart from 'components/HashrateChart'
 import { inject, observer } from 'mobx-react'
 
+const TableOverflow = styled.div`
+overflow-x: auto;
+`
+
 const AddressWrap = styled.div`
   padding: 50px;
   background: ${props => props.theme.dark_2};
@@ -125,22 +129,24 @@ class MinerAddress extends Component {
                       <HeaderWrap>
                         <h4>Miners</h4>
                       </HeaderWrap>
-                      <table className='table'>
-                        <thead>
-                          <tr>
-                            <th>Name</th>
-                            <th>Last Share</th>
-                            <th>5 minutes</th>
-                            <th>15 minutes</th>
-                            <th>1 hour</th>
-                            <th>6 hours</th>
-                            <th>24 hours</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {this.mapWorkers()}
-                        </tbody>
-                      </table>
+                      <TableOverflow>
+                        <table className='table'>
+                          <thead>
+                            <tr>
+                              <th>Name</th>
+                              <th>Last Share</th>
+                              <th>5 minutes</th>
+                              <th>15 minutes</th>
+                              <th>1 hour</th>
+                              <th>6 hours</th>
+                              <th>24 hours</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {this.mapWorkers()}
+                          </tbody>
+                        </table>
+                      </TableOverflow>
                     </div>
                     <div className='col-12 m-2 p-2'>
                       <HeaderWrap>
@@ -151,19 +157,21 @@ class MinerAddress extends Component {
                       </HeaderWrap>
 
                       {this.state.stats.payouts.length > 0
-                          ? <table className='table bg-primary'>
-                            <thead>
-                              <tr>
-                                <th>Date/Time </th>
-                                <th>Amount</th>
-                                <th colSpan={2}>Transaction ID</th>
-                                <th>Status</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {this.mapPayouts()}
-                            </tbody>
-                          </table>
+                          ? <TableOverflow>
+                            <table className='table bg-primary'>
+                              <thead>
+                                <tr>
+                                  <th>Date/Time </th>
+                                  <th>Amount</th>
+                                  <th colSpan={2}>Transaction ID</th>
+                                  <th>Status</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {this.mapPayouts()}
+                              </tbody>
+                            </table>
+                          </TableOverflow>
                           : <div className='empty'>
                             <div className='empty-icon'>
                               <i className='icon icon-people' />
