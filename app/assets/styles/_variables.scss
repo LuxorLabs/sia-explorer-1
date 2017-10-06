@@ -36,6 +36,14 @@ $highlight-color: #ffe9b3;
 $body-bg: $bg-color-light;
 $body-font-color: $light-color;
 
+@font-face {
+  font-family: 'Interface Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/Interface-Regular.otf'); /* IE9 Compat Modes */
+  src: local('Interface Regular')
+}
+
 // Fonts
 // Credit: https://www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide/
 $base-font-family: "Interface Regular", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto;
