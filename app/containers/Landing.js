@@ -10,6 +10,7 @@ import moment from 'moment'
 import calc from 'utils/calculations'
 import Button from 'components/Buttons'
 import heroSvg from 'assets/img/hero.svg'
+import breakpoint from 'styled-components-breakpoint'
 
 const Hero = styled.div`
   background: ${props => props.theme.dark_3};
@@ -23,11 +24,14 @@ const Hero = styled.div`
 `
 
 const HeroSvg = styled.div`
-  height: 200px;
+  height: 50px;
   margin: 2rem auto;
   object {
     height: 100%;
   }
+  ${breakpoint('tablet')`
+    height: 200px;
+  `}
 `
 
 const TitleWrap = styled.div`
@@ -87,20 +91,22 @@ class Landing extends React.Component {
           <div className='container grid-xl text-dark'>
             <p>Our Top Miners</p>
             {stats && stats.users
-              ? <table className='table table-striped table-hover'>
-                <thead>
-                  <tr>
-                    <th>Rank</th>
-                    <th colSpan={5}>Address</th>
-                    <th>Hashrate</th>
-                    <th>Efficiency</th>
-                    <th colSpan={2}>Last Active</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.mapStats(stats)}
-                </tbody>
-              </table>
+              ? <TableOverflow>
+                <table className='table table-striped table-hover'>
+                  <thead>
+                    <tr>
+                      <th>Rank</th>
+                      <th colSpan={5}>Address</th>
+                      <th>Hashrate</th>
+                      <th>Efficiency</th>
+                      <th colSpan={2}>Last Active</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.mapStats(stats)}
+                  </tbody>
+                </table>
+              </TableOverflow>
               : <Loading />}
           </div>
         </Tables>
@@ -141,6 +147,10 @@ class Landing extends React.Component {
 const Tables = styled.div`
 padding-top: 50px;
 padding-bottom: 100px;
+`
+
+const TableOverflow = styled.div`
+overflow-x: auto;
 `
 
 export default Landing

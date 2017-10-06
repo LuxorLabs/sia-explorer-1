@@ -3,10 +3,15 @@ import styled from 'styled-components'
 import { inject, observer } from 'mobx-react'
 import { Link, Redirect } from 'react-router-dom'
 import { ButtonSmall } from 'components/Buttons'
+import breakpoint from 'styled-components-breakpoint'
 
 const Nav = styled.div`
-  padding: 50px 0;
+  display: none;
   background: ${props => props.theme.dark_3};
+  ${breakpoint('tablet')`
+    display: block;
+    padding: 50px 0;
+  `}
 `
 
 @inject('mainStore')
