@@ -29,6 +29,10 @@ const HeroSvg = styled.div`
     height: 100%;
   }
 `
+
+const TitleWrap = styled.div`
+  margin: 40px 20px;
+`
 @inject('mainStore')
 @observer
 class Landing extends React.Component {
@@ -63,20 +67,12 @@ class Landing extends React.Component {
             <HeroSvg>
               <object data={heroSvg} type='' />
             </HeroSvg>
-            <h2>Hello Miners, we're hashing at <b>{total}/s</b></h2>
-            <h5>
-              Welcome to a
-              {' '}
-              <u>lightweight</u>
-              ,
-              {' '}
-              <u>fair</u>
-              , and
-              {' '}
-              <u>fast</u>
-              {' '}
-              mining pool for Sia.
-            </h5>
+            <TitleWrap>
+              <h2>Hi miners, we're hashing at <b>{total}/s.</b></h2>
+              <h6>
+                Meanwhile, welcome to the first mining pool that gives back.
+              </h6>
+            </TitleWrap>
             <a
               className='btn btn-lg btn-primary'
               target='_blank'
