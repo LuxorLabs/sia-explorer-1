@@ -11,6 +11,7 @@ import styled, { ThemeProvider } from 'styled-components'
 
 const theme = {
   yellow: '#fff1b9',
+  yellow_dark: '#c0ad60',
   dark_1: '#5e5e5f',
   dark_2: '#3f4040',
   dark_3: '#272625'
