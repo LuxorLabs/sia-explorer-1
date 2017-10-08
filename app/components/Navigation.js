@@ -8,7 +8,7 @@ import breakpoint from 'styled-components-breakpoint'
 const Nav = styled.div`
   display: none;
   background: ${props => props.theme.dark_3};
-  ${breakpoint('tablet')`
+  ${breakpoint('tablet') `
     display: block;
     padding: 50px 0;
   `}
@@ -21,14 +21,14 @@ class Navigation extends Component {
     this.props.mainStore.address = e.target.value
   }
 
-  render () {
+  render() {
     return (
       <Nav>
         <div className='container grid-xl'>
           <header className='navbar'>
             <section className='navbar-section'>
               <Link className='text-light' to='/'>
-                Luxor Mining Private Beta
+                Luxor Mining Beta
               </Link>
             </section>
             <section className='navbar-center'>
@@ -62,6 +62,14 @@ class Navigation extends Component {
                 style={{ color: '#FFFFFF' }}
               >
                 GitHub
+              </a>
+              <a
+                target='_blank'
+                href='mailto:hello@luxor.tech'
+                className='btn btn-link'
+                style={{ color: '#FFFFFF' }}
+              >
+                Email
               </a>
               <span
                 className='label label-rounded label-primary'
