@@ -34,7 +34,7 @@ class HashrateChart extends Component {
         }
       },
       plotOptions: {
-        area: {
+        areaspline: {
           fillColor: styles.color.darkYellow,
           lineWidth: 1,
           lineColor: styles.color.secondary,
@@ -79,7 +79,7 @@ class HashrateChart extends Component {
       series: [
         {
           name: 'Hashrate',
-          type: 'area',
+          type: 'areaspline',
           data
         }
       ],

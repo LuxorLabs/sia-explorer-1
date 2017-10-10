@@ -203,7 +203,7 @@ class Address extends Component {
                                 .sort(
                                   (a, b) => new Date(a.time) - new Date(b.time)
                                 )
-                                .splice(0, 2000)}
+                                .splice(0, 150)}
                             />}
                     </Card>
                   </Column>
