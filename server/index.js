@@ -12,6 +12,7 @@ const app = express()
 const prompt = require('./react-dev-utils/prompt')
 const openBrowser = require('./react-dev-utils/openBrowser')
 const chalk = require('chalk')
+var enforce = require('express-sslify');
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
@@ -22,6 +23,11 @@ setup(app, {
   outputPath: resolve(process.cwd(), 'build'),
   publicPath: '/'
 })
+
+if (!isDev) {
+  console.log("Enforcing HTTPS")
+  app.use(enforce.HTTPS({ trustProtoHeader: true }))
+}
 
 // get the intended host and port number, use localhost and port 3000 if not provided
 const customHost = argv.host || process.env.HOST
