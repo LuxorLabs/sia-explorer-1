@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100%" height="100%" viewBox="0 0 743 278" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-80.000000, -2016.000000)">
+            <g id="Group" transform="translate(79.615499, 2016.000000)">
+                <polygon id="Line-2" fill="#A0E2CF" fill-rule="nonzero" points="196.890653 140.759915 517.714814 140.759915 517.714814 132.305587 196.890653 132.305587"></polygon>
+                <polygon id="Line-2" fill="#1FFABB" fill-rule="nonzero" points="196.890653 179.550361 517.714814 179.550361 517.714814 171.096033 196.890653 171.096033"></polygon>
+                <polygon id="Line-2" fill="#21C596" fill-rule="nonzero" points="196.890653 101.472156 517.714814 101.472156 517.714814 93.017828 196.890653 93.017828"></polygon>
+                <g id="Group-4" transform="translate(0.045457, 0.020220)">
+                    <polygon id="Rectangle-2" fill="#565454" points="2.00662159 77.4614281 133.036679 151.454872 133.036679 277.860339 0.465091511 200.783835"></polygon>
+                    <polygon id="Rectangle-2" fill="#353535" transform="translate(200.864002, 177.660883) scale(-1, 1) translate(-200.864002, -177.660883) " points="133.036679 77.4614281 268.691326 151.454872 268.691326 277.860339 134.578209 200.783835"></polygon>
+                    <polygon id="Rectangle-2" fill="#444444" transform="translate(135.348974, 75.919898) scale(-1, 1) translate(-135.348974, -75.919898) " points="134.578209 0.384923967 268.691326 77.4614281 137.661269 151.454872 2.00662159 77.4614281"></polygon>
+                </g>
+                <g id="Group-4" transform="translate(473.894222, 0.020220)">
+                    <polygon id="Rectangle-2" fill="#565454" points="2.00662159 77.4614281 133.036679 151.454872 133.036679 277.860339 0.465091511 200.783835"></polygon>
+                    <polygon id="Rectangle-2" fill="#353535" transform="translate(200.864002, 177.660883) scale(-1, 1) translate(-200.864002, -177.660883) " points="133.036679 77.4614281 268.691326 151.454872 268.691326 277.860339 134.578209 200.783835"></polygon>
+                    <polygon id="Rectangle-2" fill="#444444" transform="translate(135.348974, 75.919898) scale(-1, 1) translate(-135.348974, -75.919898) " points="134.578209 0.384923967 268.691326 77.4614281 137.661269 151.454872 2.00662159 77.4614281"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

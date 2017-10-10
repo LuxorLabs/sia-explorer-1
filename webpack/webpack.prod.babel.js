@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const BabelEnginePlugin = require('babel-engine-plugin')
 
 const cssnext = require('postcss-cssnext')
 const postcssFocus = require('postcss-focus')
@@ -19,34 +20,23 @@ module.exports = require('./webpack.base.babel.js')({
     chunkFilename: '[name].[chunkhash].js'
   },
 
-  cssLoader: ExtractTextPlugin.extract({
-    fallback: 'style-loader',
-    use: 'css-loader!postcss-loader'
-  }),
-
-  lessLoader: ExtractTextPlugin.extract({
-    fallback: 'style-loader',
-    use: 'css-loader!postcss-loader!less-loader'
-  }),
-
-  postcssPlugins: [
-    postcssFocus(),
-    cssnext({
-      browsers: ['last 2 versions', 'IE > 10']
-    }),
-    postcssReporter({
-      clearMessages: true
-    })
-  ],
-
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(true),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false // ...but do not show warnings in the console (there is a lot of them)
-      }
+    // new webpack.optimize.UglifyJsPlugin({
+    //   parallel: {
+    //     cache: true,
+    //     workers: 2
+    //   },
+    //   sourceMap: true,
+    //   uglifyOptions: { ecma: 8 }
+    // }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      children: true,
+      minChunks: 2,
+      async: true
     }),
+    new webpack.optimize.OccurrenceOrderPlugin(true),
     new HtmlWebpackPlugin({
       template: 'app/index.html',
       minify: {

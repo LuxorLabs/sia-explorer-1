@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100%" height="100%" viewBox="0 0 1284 1005" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 9</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-2" transform="translate(-1979.000000, -675.000000)">
+            <g id="Group-9" transform="translate(1979.163167, 681.543021)">
+                <path d="M597.842477,790.559805 L776.593896,684.633038" id="Path-5" stroke="#3CDDAF" stroke-width="10"></path>
+                <path d="M584.121563,571.393877 L762.872982,465.46711" id="Path-5" stroke="#3CDDAF" stroke-width="10"></path>
+                <path d="M509.704433,554.805315 L688.455852,448.878548" id="Path-5" stroke="#3CDDAF" stroke-width="10"></path>
+                <path d="M509.704433,554.805315 L688.455852,448.878548" id="Path-5" stroke="#3CDDAF" stroke-width="10"></path>
+                <path d="M599.080142,624.35726 L777.831562,518.430493" id="Path-5" stroke="#3CDDAF" stroke-width="10"></path>
+                <path d="M663.157647,723.6261 L883.097653,584.597219" id="Path-5" stroke="#3CDDAF" stroke-width="10" transform="translate(773.222179, 654.111659) scale(-1, 1) translate(-773.222179, -654.111659) "></path>
+                <path d="M819.802736,590.271273 L998.554156,484.344506" id="Path-5" stroke="#3CDDAF" stroke-width="10" transform="translate(909.178446, 537.307890) scale(-1, 1) translate(-909.178446, -537.307890) "></path>
+                <g id="Group-8" transform="translate(406.445504, 0.000000)" stroke-width="5" stroke="#3CDDAF">
+                    <polygon id="Path-7" fill="#FCE895" points="357.21478 2 352.622283 553.099661 635.060859 387.769763"></polygon>
+                    <polygon id="Path-9" fill="#FCE06F" points="0 346.437288 353.391329 0.456978568 348.391329 553.456979"></polygon>
+                </g>
+                <path d="M545.430889,776.589484 C618.483993,738.561595 664.196069,711.472957 682.567116,695.323572 C700.938163,679.174186 676.325196,657.161353 608.728215,629.285073" id="Path-5" stroke="#3CDDAF" stroke-width="10"></path>
+                <g id="Group-7" transform="translate(0.121636, 336.841691)">
+                    <polygon id="Rectangle-2" fill="#565454" points="3.9456048 182.350131 319.862682 357.341339 319.862682 656.284652 0.228933307 474.002144"></polygon>
+                    <polygon id="Rectangle-2" fill="#353535" points="646.929773 182.350131 319.862682 357.341339 319.862682 656.284652 643.213101 474.002144"></polygon>
+                    <polygon id="Rectangle-2" fill="#444444" points="327.296025 0.0676224317 3.9456048 182.350131 319.862682 357.341339 646.929773 182.350131"></polygon>
+                </g>
+                <g id="Group-6" transform="translate(1013.084045, 723.878548) scale(-1, 1) translate(-1013.084045, -723.878548) translate(742.084045, 448.878548)">
+                    <polygon id="Rectangle-2" fill="#565454" points="3.92903808 153.157071 267.838563 299.340516 267.838563 549.070568 0.824220139 396.796146"></polygon>
+                    <polygon id="Rectangle-2" fill="#353535" points="541.062542 153.157071 267.838563 299.340516 267.838563 549.070568 537.957724 396.796146"></polygon>
+                    <polygon id="Rectangle-2" fill="#444444" points="274.048199 0.882649106 3.92903808 153.157071 267.838563 299.340516 541.062542 153.157071"></polygon>
+                </g>
+                <polygon id="Path-6" points="528.628034 377.709002 783.514317 528.323624 987.092323 407.500905 728.895828 261.8516"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

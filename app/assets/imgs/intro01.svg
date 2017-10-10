@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100%" height="100%" viewBox="0 0 595 257" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>groupBoxes</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-770.000000, -1392.000000)">
+            <g id="Group-3" transform="translate(770.000000, 1391.500000)">
+                <g id="groupBoxes">
+                    <g id="green" transform="translate(272.270524, 65.119831)">
+                        <polygon id="base_2" fill="#838181" points="161.43035 191.731584 322.432384 102.021891 161.43035 14.5002401 0.428315374 103.115912"></polygon>
+                        <polygon id="base_1" fill="#3CDDAF" points="161.43035 177.643242 322.432384 87.9335493 161.43035 0.411898023 0.428315374 89.02757"></polygon>
+                    </g>
+                    <g id="yellow" transform="translate(0.030223, 0.217299)">
+                        <polygon id="base_2" fill="#838181" points="161.423611 191.681572 322.425646 101.971879 161.423611 14.450228 0.421577316 103.0659"></polygon>
+                        <polygon id="base_1" fill="#FDF1BF" points="161.423611 177.59323 322.425646 87.8835371 161.423611 0.361885842 0.421577316 88.9775578"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

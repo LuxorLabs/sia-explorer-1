@@ -1,10 +1,13 @@
 const axios = require('axios')
 const router = require('express').Router()
+const CoinMarketCap = require('coinmarketcap-api')
 
 const luxor = axios.create({
   baseURL: 'http://api.luxor.tech:8082',
   timeout: 10000
 })
+
+const cmc = new CoinMarketCap()
 
 router.get('/stats', (req, res) => {
   luxor
@@ -25,8 +28,19 @@ router.get('/user/:address', (req, res) => {
       res.send(data)
     })
     .catch(err => {
-      res.send({ message: 'Not found' })
+      console.log(err)
     })
+})
+
+router.get('/price', (req, res) => {
+  cmc
+    .getTicker({
+      currency: 'siacoin'
+    })
+    .then(data => {
+      res.send(data)
+    })
+    .catch(console.error)
 })
 
 module.exports = router

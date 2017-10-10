@@ -26,16 +26,16 @@ module.exports = options => ({
         exclude: /node_modules/
       },
       {
-        test: /\.(eot|otf|ttf|woff|woff2)$/,
-        loader: 'file-loader?name=public/fonts/[name].[ext]'
-      },
-      {
         test: /\.scss$/,
         loader: 'style-loader!css-loader!postcss-loader!sass-loader'
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
+        test: /\.(jpe?g|png|gif)$/i,
         loaders: 'file-loader'
+      },
+      {
+        test: /\.svg$/,
+        loader: 'raw-loader'
       },
       {
         test: /\.html$/,
