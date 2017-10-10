@@ -21,7 +21,7 @@ class Blocks extends Component {
         b.height,
         b.hash,
         calc.hastingsToSC(b.payout).toFixed(0),
-        moment.utc(b.timestamp).fromNow(),
+        moment.unix(b.timestamp).fromNow(),
         b.paid ? 'Paid' : 'Unpaid'
       ])
   render () {
