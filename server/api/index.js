@@ -2,7 +2,7 @@ const axios = require('axios')
 const router = require('express').Router()
 const CoinMarketCap = require('coinmarketcap-api')
 const NodeCache = require('node-cache')
-const cache = new NodeCache({ stdTTL: 15, checkperiod: 120 })
+const cache = new NodeCache({ stdTTL: 10, checkperiod: 120 })
 
 const luxor = axios.create({
   baseURL: 'http://api.luxor.tech:8082',
@@ -81,9 +81,24 @@ router.get('/user/:address', (req, res) => {
 
 router.get('/price', (req, res) => {
   cache.get(TICKER_KEY, (err, val) => {
-    if (!err){
-      if (val === undefined){
+    if (!err) {
+      if (val === undefined) {
         cmc
+          .getTicker({
+            currency: 'siacoin'
+          })
+          .then(data => {
+            cache.set(TICKER_KEY, data)
+            res.send(data)
+          })
+          .catch(console.error)
+      } else {
+        //cache hit
+        res.send(val)
+      }
+    } else {
+      console.log('Error in caching CMC infrastructure.  This needs to be investigated. Making the API call as a fallback')
+      cmc
         .getTicker({
           currency: 'siacoin'
         })
@@ -92,21 +107,6 @@ router.get('/price', (req, res) => {
           res.send(data)
         })
         .catch(console.error)
-      } else {
-        //cache hit
-        res.send(val)
-      }
-    } else {
-      console.log('Error in caching CMC infrastructure.  This needs to be investigated. Making the API call as a fallback')
-      cmc
-      .getTicker({
-        currency: 'siacoin'
-      })
-      .then(data => {
-        cache.set(TICKER_KEY, data)
-        res.send(data)
-      })
-      .catch(console.error)
     }
   })
 
