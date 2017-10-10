@@ -145,6 +145,24 @@ class Address extends Component {
             </Section>
             <Section alt>
               <Container>
+                <Card altDark>
+                  <Row>
+                    <Column style={{ textAlign: 'center' }}>
+                      <Text h5>
+                          Please note that we count shares using PPLNS. Your balance is only reflected on the next block we find.
+                          {' '}
+                        <Text.Anchor
+                          href='https://minergate.com/faq/difference-between-pps-and-pplns'
+                          target='_blank'
+                          h5
+                          secondary
+                          >
+                            Learn about PPLNS vs. PPS.
+                          </Text.Anchor>
+                      </Text>
+                    </Column>
+                  </Row>
+                </Card>
                 <Row>
                   <Column md={4}>
                     <Card altDark>
