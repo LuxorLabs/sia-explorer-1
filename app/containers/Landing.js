@@ -1,156 +1,217 @@
 import React from 'react'
 import styled from 'styled-components'
-import { inject, observer } from 'mobx-react'
-import 'styles/spectre.scss'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
-import Navigation from 'components/Navigation'
-import Loading from 'components/Loading'
-import moment from 'moment'
-import calc from 'utils/calculations'
-import Button from 'components/Buttons'
-import heroSvg from 'assets/img/hero.svg'
+import styles from 'styles'
 import breakpoint from 'styled-components-breakpoint'
+import { inject, observer } from 'mobx-react'
+import { Page, Row, Column } from 'hedron'
+import Container from 'components/Container'
+import Topbar from 'components/Topbar'
+import Navbar from 'components/Navbar'
+import { Button } from 'components/Button'
+import { Text } from 'components/Typography'
+import { Section } from 'components/Section'
+import { Card } from 'components/Card'
+import Footer from 'components/Footer'
+import SVGInline from 'react-svg-inline'
+import heroSvg from 'assets/imgs/hero.svg'
+import intro01 from 'assets/imgs/intro01.svg'
+import intro02 from 'assets/imgs/intro02.svg'
+import intro03 from 'assets/imgs/intro03.svg'
 
-const Hero = styled.div`
-  background: ${props => props.theme.dark_3};
-  padding: 3rem;
-  h5 {
-    margin-bottom: 2rem;
+const HeroImageWrapper = styled.div`
+  width: 100%;
+  max-width: 40vw;
+  height: 250px;
+  margin: ${styles.spacing.baseRem * 4}rem;
+  @keyframes hovering {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(25px);
+      opacity: 0.2;
+    }
   }
-  .btn {
-    margin: 0.5rem;
+  @keyframes asic {
+    0% {
+      transform: translate(120.715801px, 36.614051px);
+    }
+    100% {
+      transform:translate(120.715801px, 16.614051px);
+    }
+  }
+  #asic {
+    animation: asic 3s ease-in-out infinite alternate;
+  }
+  #hv1 {
+    animation: hovering 3s ease-in-out infinite alternate;
+  }
+  #hv2 {
+    animation: hovering 3s ease-in-out infinite alternate;
+    animation-delay: 0.25s;
+  }
+  #hv3 {
+    animation: hovering 3s ease-in-out infinite alternate;
+    animation-delay: 0.5s;
   }
 `
 
-const HeroSvg = styled.div`
-  height: 50px;
-  margin: 2rem auto;
-  object {
-    height: 100%;
-  }
-  ${breakpoint('tablet')`
-    height: 200px;
-  `}
+const IntroImageWrapper = styled.div`
+  width: 100%;
 `
 
-const TitleWrap = styled.div`
-  margin: 40px 20px;
+const IntroText = styled(Text)`
+
 `
+
+const ReverseRow = styled(Row)`
+  flex-direction: row-reverse;
+`
+
 @inject('mainStore')
 @observer
 class Landing extends React.Component {
-  componentWillMount () {
-    this.fetchStats()
-    this.setPolling = setInterval(() => {
-      this.fetchStats()
-    }, 10000)
-  }
-  componentWillUnmount () {
-    clearInterval(this.setPolling)
-  }
-  fetchStats = () => {
-    axios.get('/api/stats').then(({ data }) => {
-      this.props.mainStore.stats = data
-    })
-  }
   render () {
-    const { stats } = this.props.mainStore
-    var total = stats && stats.users
-      ? calc.smartHashrate(
-          stats.users.reduce((a, b) => {
-            return a + b.hashrate
-          }, 0)
-        )
-      : 0.0
     return (
       <div>
-        <Navigation />
-        <Hero>
-          <div className='container grid-xl text-center'>
-            <HeroSvg>
-              <object data={heroSvg} type='' />
-            </HeroSvg>
-            <TitleWrap>
-              <h2>Hi miners, we're hashing at <b>{total}/s.</b></h2>
-              <h6>
-                Welcome to the first Sia mining pool that gives 10% back.
-              </h6>
-            </TitleWrap>
-            <a
-              className='btn btn-lg btn-primary'
-              target='_blank'
-              href='https://medium.com/@nitronick600/31b8cb83e21f'
-            >
-              Learn more
-            </a>
-            <Button to='/setup' text='Get Started' />
-          </div>
-        </Hero>
-        <Tables>
-          <div className='container grid-xl text-dark'>
-            <p>Our Top Miners</p>
-            {stats && stats.users
-              ? <TableOverflow>
-                <table className='table table-striped table-hover'>
-                  <thead>
-                    <tr>
-                      <th>Rank</th>
-                      <th colSpan={5}>Address</th>
-                      <th>Hashrate</th>
-                      <th>Efficiency</th>
-                      <th colSpan={2}>Last Active</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {this.mapStats(stats)}
-                  </tbody>
-                </table>
-              </TableOverflow>
-              : <Loading />}
-          </div>
-        </Tables>
+        <Topbar />
+        <Navbar />
+        <Section ptm={70} pbm={70}>
+          <Container>
+            <Row justifyContent='center'>
+              <HeroImageWrapper>
+                <SVGInline svg={heroSvg} />
+              </HeroImageWrapper>
+              <Column style={{ textAlign: 'center' }} sm={6}>
+                <Text.Block h2 marginBottom={20}>
+                  A next generation mining pool
+                </Text.Block>
+                <Text.Block bold>
+                  Luxor is a fast and stable Sia pool that donates a portion of profits back to the core developers
+                </Text.Block>
+                <Button.Link to='/setup' marginTop={25}>Setup Now</Button.Link>
+              </Column>
+            </Row>
+          </Container>
+        </Section>
+        <Section alt ptm={70} pbm={70}>
+          <Container>
+            <Row alignItems='center'>
+              <Column md={6}>
+                <IntroText huge>
+                  A blazing fast pool created by Sia Core Contributors
+                </IntroText>
+              </Column>
+              <Column md={6}>
+                <Card altDark>
+                  <Row
+                    style={{ textAlign: 'center' }}
+                    justifyContent='space-around'
+                  >
+                    <Column fluid xs={4}>
+                      <Text.Block huge bold>2.5%</Text.Block>
+                      <Text.Block small bold>fee for top miners</Text.Block>
+                    </Column>
+                    <Column fluid xs={4}>
+                      <Text.Block huge bold>3%</Text.Block>
+                      <Text.Block small bold>fee for miners</Text.Block>
+                    </Column>
+                    <Column fluid xs={4}>
+                      <Text.Block huge bold>10%</Text.Block>
+                      <Text.Block small bold>
+                        of fee profits to Sia
+                      </Text.Block>
+                    </Column>
+                  </Row>
+                </Card>
+              </Column>
+            </Row>
+          </Container>
+        </Section>
+        <Section ptm={70} pbm={70}>
+          <Container>
+            <Row>
+              <Column md={6}>
+                <Text.Block marginBottom={styles.spacing.base} h3>
+                  Earn with your hashpower.<br />Give back to the community.
+                </Text.Block>
+                <Text.Block>
+                  By mining with Luxor Mining, we promise to donate 10% of profits to a cold storage address held by Nebulous Labs, the umbrella company that employs all the core-devs.
+                </Text.Block>
+              </Column>
+              <Column md={6}>
+                <IntroImageWrapper>
+                  <SVGInline svg={intro01} />
+                </IntroImageWrapper>
+              </Column>
+            </Row>
+          </Container>
+        </Section>
+        <Section ptm={70} pbm={70}>
+          <Container>
+            <ReverseRow>
+              <Column md={6}>
+                <Text.Block marginBottom={styles.spacing.base} h3>
+                  A fast, light and simple <br />stratum mining pool.
+                </Text.Block>
+                <Text.Block>
+                  Our pool is compatible with all Siacoin mining software available. Be sure to check our our setup guide to get step-by-step instructions.
+                </Text.Block>
+              </Column>
+              <Column md={6}>
+                <IntroImageWrapper>
+                  <SVGInline svg={intro02} />
+                </IntroImageWrapper>
+              </Column>
+            </ReverseRow>
+          </Container>
+        </Section>
+        <Section ptm={70} pbm={70}>
+          <Container>
+            <Row>
+              <Column md={6}>
+                <Text.Block marginBottom={styles.spacing.base} h3>
+                  We're a part of the community.<br />find us on Discord.
+                </Text.Block>
+                <Text.Block>
+                  Need help getting your miner up and running? Issues with payouts? We're here to help. Find us on the Sia Discord channel and ping us anytime.
+                </Text.Block>
+                <div style={{ marginTop: `${styles.spacing.base * 5}px` }}>
+                  <Button.a
+                    target='_blank'
+                    href='https://discord.gg/sia'
+                    background='discordPurple'
+                  >
+                    Find Us On Discord
+                  </Button.a>
+                </div>
+              </Column>
+              <Column md={6}>
+                <IntroImageWrapper>
+                  <SVGInline svg={intro03} />
+                </IntroImageWrapper>
+              </Column>
+            </Row>
+          </Container>
+        </Section>
+        <Section alt ptm={100} pbm={100}>
+          <Container>
+            <Row>
+              <Column style={{ textAlign: 'center' }} md={12}>
+                <Text h2>
+                  Convinced? Let's
+                  {' '}
+                  <Text.Link h2 secondary to='/setup'>get started</Text.Link>
+                </Text>
+              </Column>
+            </Row>
+          </Container>
+        </Section>
+        <Footer />
       </div>
     )
   }
-  mapStats = stats => {
-    return stats.users
-      .sort((a, b) => {
-        return b.hashrate - a.hashrate
-      })
-      .slice(0, 20)
-      .map((m, i) => {
-        const time = m.miners && m.miners.length > 0
-          ? m.miners.map(w => w.last_beat).reduce((c, a) => (c > a ? c : a))
-          : 0
-        const eff = m.rejects_count > 0 || m.invalid_shares_count > 0
-          ? 100 -
-              (m.rejects_count + m.invalid_shares_count) / m.valid_shares_count
-          : 100
-        return (
-          <tr key={m.address}>
-            <td>{i + 1}</td>
-            <td colSpan={5}>
-              <Link to={`/miner/${m.address}`}>{m.address}</Link>
-            </td>
-            <td>{calc.smartHashrate(m.hashrate)}/s</td>
-            <td>{eff.toFixed(2)}%</td>
-            <td colSpan={2}>
-              {time === 0 ? 'Never' : moment.unix(time).fromNow()}
-            </td>
-          </tr>
-        )
-      })
-  }
 }
-
-const Tables = styled.div`
-padding-top: 50px;
-padding-bottom: 100px;
-`
-
-const TableOverflow = styled.div`
-overflow-x: auto;
-`
 
 export default Landing
