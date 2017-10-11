@@ -8,22 +8,23 @@ import { SearchInput } from 'components/Form'
 import Container from 'components/Container'
 import { Row, Column } from 'hedron'
 import Waypoint from 'react-waypoint'
+import { FormattedMessage } from 'react-intl'
 
 const Links = [
   {
-    name: 'Home',
+    name: <FormattedMessage id='nav.home' />,
     to: '/'
   },
   {
-    name: 'Setup Guide',
+    name: <FormattedMessage id='nav.setup' />,
     to: '/setup'
   },
   {
-    name: 'Blocks',
+    name: <FormattedMessage id='nav.blocks' />,
     to: '/blocks'
   },
   {
-    name: 'Miners',
+    name: <FormattedMessage id='nav.miners' />,
     to: '/miners'
   }
 ]

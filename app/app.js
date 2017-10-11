@@ -20,6 +20,12 @@ import Blocks from 'containers/Blocks'
 import Setup from 'containers/Setup'
 import Address from 'containers/Address'
 
+import { IntlProvider, addLocaleData } from 'react-intl'
+import en from 'react-intl/locale-data/en'
+import zh from 'react-intl/locale-data/zh'
+
+addLocaleData([...en, ...zh])
+
 injectGlobal`
   ${styledNormalize}
   @font-face {
@@ -96,16 +102,19 @@ class App extends React.Component {
     clearInterval(this.props.mainStore.fetchProcess)
   }
   render () {
+    const { i18nConfig } = this.props.mainStore
     return (
-      <Router>
-        <div className='app'>
-          <Route exact path='/' component={Landing} />
-          <Route exact path='/miners' component={Miners} />
-          <Route exact path='/blocks' component={Blocks} />
-          <Route exact path='/setup' component={Setup} />
-          <Route exact path='/miners/:address' component={Address} />
-        </div>
-      </Router>
+      <IntlProvider locale={i18nConfig.locale} messages={i18nConfig.messages}>
+        <Router>
+          <div className='app'>
+            <Route exact path='/' component={Landing} />
+            <Route exact path='/miners' component={Miners} />
+            <Route exact path='/blocks' component={Blocks} />
+            <Route exact path='/setup' component={Setup} />
+            <Route exact path='/miners/:address' component={Address} />
+          </div>
+        </Router>
+      </IntlProvider>
     )
   }
 }
@@ -117,6 +126,7 @@ class Wrapper extends React.Component {
     return (
       <Provider mainStore={this.mainStore}>
         <BreakpointProvider breakpoints={styles.breakpoint}>
+
           <App />
         </BreakpointProvider>
       </Provider>

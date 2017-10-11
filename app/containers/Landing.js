@@ -17,6 +17,7 @@ import heroSvg from 'assets/imgs/hero.svg'
 import intro01 from 'assets/imgs/intro01.svg'
 import intro02 from 'assets/imgs/intro02.svg'
 import intro03 from 'assets/imgs/intro03.svg'
+import { FormattedMessage } from 'react-intl'
 
 const HeroImageWrapper = styled.div`
   width: 100%;
@@ -85,12 +86,14 @@ class Landing extends React.Component {
               </HeroImageWrapper>
               <Column style={{ textAlign: 'center' }} sm={6}>
                 <Text.Block h2 marginBottom={20}>
-                  A next generation mining pool
+                  <FormattedMessage id='landing.greeting' />
                 </Text.Block>
                 <Text.Block bold>
-                  Luxor is a fast and stable Sia pool that donates a portion of profits back to the core developers
+                  <FormattedMessage id='landing.subtitle' />
                 </Text.Block>
-                <Button.Link to='/setup' marginTop={25}>Setup Now</Button.Link>
+                <Button.Link to='/setup' marginTop={25}>
+                  <FormattedMessage id='landing.setupButton' />
+                </Button.Link>
               </Column>
             </Row>
           </Container>
@@ -100,7 +103,7 @@ class Landing extends React.Component {
             <Row alignItems='center'>
               <Column md={6}>
                 <IntroText huge>
-                  A blazing fast pool created by Sia Core Contributors
+                  <FormattedMessage id='landing.prePitch' />
                 </IntroText>
               </Column>
               <Column md={6}>
@@ -111,16 +114,20 @@ class Landing extends React.Component {
                   >
                     <Column fluid xs={4}>
                       <Text.Block huge bold>2.5%</Text.Block>
-                      <Text.Block small bold>fee for top miners</Text.Block>
+                      <Text.Block small bold>
+                        <FormattedMessage id='landing.prePitchMini1' />
+                      </Text.Block>
                     </Column>
                     <Column fluid xs={4}>
                       <Text.Block huge bold>3%</Text.Block>
-                      <Text.Block small bold>fee for miners</Text.Block>
+                      <Text.Block small bold>
+                        <FormattedMessage id='landing.prePitchMini2' />
+                      </Text.Block>
                     </Column>
                     <Column fluid xs={4}>
                       <Text.Block huge bold>10%</Text.Block>
                       <Text.Block small bold>
-                        of fee profits to Sia
+                        <FormattedMessage id='landing.prePitchMini3' />
                       </Text.Block>
                     </Column>
                   </Row>
@@ -134,10 +141,12 @@ class Landing extends React.Component {
             <Row>
               <Column md={6}>
                 <Text.Block marginBottom={styles.spacing.base} h3>
-                  Earn with your hashpower.<br />Give back to the community.
+                  <FormattedMessage id='landing.pitchTitle1_1' />
+                  <br />
+                  <FormattedMessage id='landing.pitchTitle1_2' />
                 </Text.Block>
                 <Text.Block>
-                  By mining with Luxor Mining, we promise to donate 10% of profits to a cold storage address held by Nebulous Labs, the umbrella company that employs all the core-devs.
+                  <FormattedMessage id='landing.pitchDesc1' />
                 </Text.Block>
               </Column>
               <Column md={6}>
@@ -153,10 +162,13 @@ class Landing extends React.Component {
             <ReverseRow>
               <Column md={6}>
                 <Text.Block marginBottom={styles.spacing.base} h3>
-                  A fast, light and simple <br />stratum mining pool.
+                  <FormattedMessage id='landing.pitchTitle2_1' />
+                  {' '}
+                  <br />
+                  <FormattedMessage id='landing.pitchTitle2_2' />
                 </Text.Block>
                 <Text.Block>
-                  Our pool is compatible with all Siacoin mining software available. Be sure to check our our setup guide to get step-by-step instructions.
+                  <FormattedMessage id='landing.pitchDesc2' />
                 </Text.Block>
               </Column>
               <Column md={6}>
@@ -172,10 +184,12 @@ class Landing extends React.Component {
             <Row>
               <Column md={6}>
                 <Text.Block marginBottom={styles.spacing.base} h3>
-                  We're a part of the community.<br />find us on Discord.
+                  <FormattedMessage id='landing.pitchTitle3_1' />
+                  <br />
+                  <FormattedMessage id='landing.pitchTitle3_2' />
                 </Text.Block>
                 <Text.Block>
-                  Need help getting your miner up and running? Issues with payouts? We're here to help. Find us on the Sia Discord channel and ping us anytime.
+                  <FormattedMessage id='landing.pitchDesc3' />
                 </Text.Block>
                 <div style={{ marginTop: `${styles.spacing.base * 5}px` }}>
                   <Button.a
@@ -183,7 +197,7 @@ class Landing extends React.Component {
                     href='https://discord.gg/sia'
                     background='discordPurple'
                   >
-                    Find Us On Discord
+                    <FormattedMessage id='landing.discordButton' />
                   </Button.a>
                 </div>
               </Column>
@@ -200,9 +214,11 @@ class Landing extends React.Component {
             <Row>
               <Column style={{ textAlign: 'center' }} md={12}>
                 <Text h2>
-                  Convinced? Let's
+                  <FormattedMessage id='landing.cta' />
                   {' '}
-                  <Text.Link h2 secondary to='/setup'>get started</Text.Link>
+                  <Text.Link h2 secondary to='/setup'>
+                    <FormattedMessage id='landing.ctaLink' />
+                  </Text.Link>
                 </Text>
               </Column>
             </Row>

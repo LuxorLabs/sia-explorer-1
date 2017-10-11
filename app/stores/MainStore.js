@@ -2,6 +2,7 @@ import { observable, computed } from 'mobx'
 import axios from 'axios'
 import calc from 'utils/calc'
 import moment from 'moment'
+import langEn from 'translations/en.json'
 
 const summaryCardState = {
   unpaidBalance: '0 SC',
@@ -30,6 +31,11 @@ const singlePayoutState = {
   status: 'unconfirmed'
 }
 
+const i18nConfig = {
+  locale: 'en',
+  messages: langEn
+}
+
 export class MainStore {
   @observable counter = 0
   @observable UI = {
@@ -42,6 +48,8 @@ export class MainStore {
     }
   }
 
+  @observable i18nConfig = i18nConfig
+
   @observable stats = {}
   @observable addressStats = {}
   @observable coinmarketcap = {
@@ -53,7 +61,7 @@ export class MainStore {
     this.fetchProcess = setInterval(() => {
       this.fetchPrice()
       this.fetchStats()
-    }, 10000)
+    }, 60000)
   }
 
   @computed get summaryCardStats () {

@@ -5,6 +5,7 @@ import { Card } from 'components/Card'
 import { Text } from 'components/Typography'
 import breakpoint from 'styled-components-breakpoint'
 import { inject, observer } from 'mobx-react'
+import { FormattedMessage } from 'react-intl'
 
 const NavList = styled.ul`
   color: white;
@@ -29,14 +30,14 @@ const NavCard = styled(Card)`
 `
 
 const Menu = [
-  'Making the Switch',
-  'Quickstart',
-  'Compatible Miners',
-  'Prebuilt Commands',
-  "What's Claymore",
-  'Regions',
-  'Hosted Mining',
-  'Questions?'
+  <FormattedMessage id='setup.switch' />,
+  <FormattedMessage id='setup.quickstart' />,
+  <FormattedMessage id='setup.miners' />,
+  <FormattedMessage id='setup.prebuiltCommands' />,
+  <FormattedMessage id='setup.claymore' />,
+  <FormattedMessage id='setup.regions' />,
+  <FormattedMessage id='setup.hostedMining' />,
+  <FormattedMessage id='setup.questions' />
 ]
 
 @inject('mainStore')

@@ -16,6 +16,7 @@ import SetupCard from 'components/SetupCard'
 import { inject, observer } from 'mobx-react'
 import { SetupRegionTable } from 'components/Table'
 import breakpoint from 'styled-components-breakpoint'
+import { FormattedMessage } from 'react-intl'
 
 const SetupHeroImageWrapper = styled.div`
   width: 100%;
@@ -51,7 +52,7 @@ class Setup extends Component {
           <Container>
             <Row alignItems='center'>
               <CenterColumn fluid md={9}>
-                <Text h2>Getting Started</Text>
+                <Text h2><FormattedMessage id='setup.gettingStarted' /></Text>
               </CenterColumn>
               <CenterColumn fluid md={3}>
                 <SetupHeroImageWrapper>
@@ -67,22 +68,25 @@ class Setup extends Component {
               <SetupNav />
             </Column>
             <Column lg={9} md={8}>
-              <SetupCard anchor={0} title='Making The Switch'>
+              <SetupCard
+                anchor={0}
+                title={<FormattedMessage id='setup.switch' />}
+              >
                 <Text.Block>
-                  If you’re mining Siacoin currently, follow these steps to make the switch:
+                  <FormattedMessage id='setup.switchDesc' />
                 </Text.Block>
                 <ol>
                   <li>
-                    Finish up mining with your current pool. You most likely need to get to 500SC before your current pool will pay you out. You don’t want to leave those coins behind!
+                    <FormattedMessage id='setup.switchLi_1' />
                   </li>
                   <li>
-                    Update your configuration: In your configuration, change the pool address to one of our supported pools. Our default pool is us-east.luxor.tech:3333.
+                    <FormattedMessage id='setup.switchLi_2' />
                   </li>
                   <li>
-                    Check your stats on our stats page. It will take a minute or two for your stats to start showing up.
+                    <FormattedMessage id='setup.switchLi_3' />
                   </li>
                   <li>
-                    Go grab a drink. You deserve it! (if you’re ever in Seattle, reach out to
+                    <FormattedMessage id='setup.switchLi_4_1' />
                     {' '}
                     <Text.Anchor
                       href='https://twitter.com/NickHansen600'
@@ -91,30 +95,30 @@ class Setup extends Component {
                     >
                       Nick
                     </Text.Anchor>
-                    . He’d love to grab a drink with you!)
+                    <FormattedMessage id='setup.switchLi_4_2' />
                   </li>
                 </ol>
               </SetupCard>
               <SetupCard anchor={1} title='Quickstart'>
                 <Text.Block>
-                  If you have experience mining - here are the basic commands we recommend for different miners. Just fill in a payout address and a worker name, and it's off to the races! The following is a quick start guide of mining SiaCoin on Windows 7 or greater x64. To mine SiaCoin you need a SiaCoin address, a GPU and mining software. To get an address you can either:
+                  <FormattedMessage id='setup.quickstartDesc' />
                 </Text.Block>
                 <ul>
                   <li>
-                    Get the
+                    <FormattedMessage id='setup.quickstartLi_1_1' />
                     {' '}
                     <Text.Anchor
                       secondary
                       href='http://sia.tech/apps/'
                       target='_blank'
                     >
-                      Sia client
+                      <FormattedMessage id='setup.quickstartLi_1_2' />
                     </Text.Anchor>
                     {' '}
-                    and use it to generate an address.
+                    <FormattedMessage id='setup.quickstartLi_1_3' />
                   </li>
                   <li>
-                    Use an exchange address (e.g.
+                    <FormattedMessage id='setup.quickstartLi_1_2' />
                     {' '}
                     <Text.Anchor
                       secondary
@@ -157,7 +161,7 @@ class Setup extends Component {
               </SetupCard>
               <SetupCard anchor={2} title='Compatible Miners'>
                 <Text.Block marginBottom={10}>
-                  A compatible Miner can be downloaded from the links below:
+                  <FormattedMessage id='setup.minersDesc' />
                 </Text.Block>
                 <Text.Block>
                   Marlin (AMD & Nvidia):
@@ -213,11 +217,12 @@ class Setup extends Component {
               </SetupCard>
               <SetupCard anchor={3} title='Pre-Built Commands'>
                 <Text.Block marginBottom={10}>
-                  Just fill these commands in with your mining address and a miner name and you’re set.
+                  <FormattedMessage id='setup.prebuiltCommandsDesc_1' />
                 </Text.Block>
                 <Text.Block>
-                  <strong>Note: </strong>
-                  make sure to pick the region that best suits you. Latency is important!
+                  <strong>
+                    <FormattedMessage id='setup.prebuiltCommandsDesc_2' />
+                  </strong>
                 </Text.Block>
                 <Text.Block marginBottom={10}>
                   Marlin:
@@ -252,12 +257,12 @@ class Setup extends Component {
               </SetupCard>
               <SetupCard anchor={4} title="What's Claymore">
                 <Text.Block>
-                  Claymore is a way to dual mine Ethereum with other coins. It is generally the most profitable way to mine base purely on ROI, but to accumulate the most SC, many of our miners choose to mine SC exclusively.
+                  <FormattedMessage id='setup.claymoreDesc' />
                 </Text.Block>
               </SetupCard>
               <SetupCard anchor={5} title='Regions'>
                 <Text.Block marginBottom={20}>
-                  Our regions are listed below:
+                  <FormattedMessage id='setup.regionsDesc' />
                 </Text.Block>
                 <SetupRegionTable
                   breakpoint={styles.breakpoint.lg}
@@ -274,7 +279,7 @@ class Setup extends Component {
                   Mining Rig Rentals
                 </Text.Anchor>
                 <Text.Block marginTop={10} marginBottom={10}>
-                  Mining Rig Rentals has partnered with Luxor and offers hosted Siacoin mining. They offer competitive mining contracts and work with all of Luxor’s pools. We used them during testing, and had great success!
+                  <FormattedMessage id='setup.hostedMiningDesc_1' />
                 </Text.Block>
                 <Text.Anchor
                   href='https://www.nicehash.com/?refby=512247'
@@ -284,18 +289,18 @@ class Setup extends Component {
                   Nicehash
                 </Text.Anchor>
                 <Text.Block marginTop={10}>
-                  Have you ever owned 8Th/s of mining power? It’s pretty awesome! We used NiceHash to test Luxor’s ability to scale, and it was incredible.
+                  <FormattedMessage id='setup.hostedMiningDesc_2' />
                 </Text.Block>
               </SetupCard>
               <SetupCard anchor={7} title='Questions?'>
                 <Text.Block>
-                  We're here to help. Send us an
+                  <FormattedMessage id='setup.questionsDesc_1' />
                   {' '}
                   <Text.Anchor secondary href='mailto:hello@luxor.tech'>
-                    email
+                    <FormattedMessage id='setup.questionsEmail' />
                   </Text.Anchor>
                   {' '}
-                  or tweet us
+                  <FormattedMessage id='setup.questionsDesc_2' />
                   {' '}
                   <Text.Anchor
                     href='https://twitter.com/LuxorTechTeam'
