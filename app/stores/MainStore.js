@@ -3,6 +3,8 @@ import axios from 'axios'
 import calc from 'utils/calc'
 import moment from 'moment'
 import langEn from 'translations/en.json'
+import langZh from 'translations/zh.json'
+import browserLocale from 'utils/locale'
 
 const summaryCardState = {
   unpaidBalance: '0 SC',
@@ -50,6 +52,15 @@ export class MainStore {
 
   @observable i18nConfig = i18nConfig
 
+  handleLocale = () => {
+    const locale = browserLocale().split('-')
+    const lang = locale[0].toLowerCase()
+    console.log(locale)
+    if (lang === 'zh') {
+      this.i18nConfig.locale = 'zh'
+      this.i18nConfig.messages = langZh
+    }
+  }
   @observable stats = {}
   @observable addressStats = {}
   @observable coinmarketcap = {

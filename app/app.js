@@ -97,6 +97,7 @@ injectGlobal`
 class App extends React.Component {
   componentDidMount () {
     this.props.mainStore.intervalFetch()
+    this.props.mainStore.handleLocale()
   }
   componentWillUnmount () {
     clearInterval(this.props.mainStore.fetchProcess)
