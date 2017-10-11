@@ -5,6 +5,7 @@ import moment from 'moment'
 
 const summaryCardState = {
   unpaidBalance: '0 SC',
+  estimatedPayout: '0 SC',
   hashrate: '0',
   efficiency: '0',
   paidRewards: '0 SC',
@@ -63,6 +64,9 @@ export class MainStore {
       const efficiency = `${this.userEff(address)}%`
       return {
         unpaidBalance: `${calc.hastingsToSC(stats.balance).toFixed(2)} SC`,
+        estimatedPayout: `${calc
+          .hastingsToSC(this.userPayoutRound(address))
+          .toFixed(2)} SC`,
         paidRewards: `${calc.hastingsToSC(stats.total_payouts).toFixed(2)} SC`,
         blocksFound: stats.blocks_found,
         hashrate,
@@ -127,6 +131,16 @@ export class MainStore {
     const { stats } = this
     if (stats && stats.users) {
       return this.stats.users.filter(u => u.address === address)[0].hashrate
+    } else {
+      return 0
+    }
+  }
+
+  userPayoutRound = address => {
+    const { stats } = this
+    if (stats && stats.users) {
+      return this.stats.users.filter(u => u.address === address)[0]
+        .estimated_round_payout
     } else {
       return 0
     }

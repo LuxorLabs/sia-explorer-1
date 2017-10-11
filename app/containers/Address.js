@@ -148,8 +148,11 @@ class Address extends Component {
                 <Card altDark>
                   <Row>
                     <Column style={{ textAlign: 'center' }}>
-                      <Text h5>
-                          Please note that we count shares using PPLNS. Your balance is only reflected on the next block we find.
+                      <Text.Block h4>
+                        {summary.estimatedPayout}
+                      </Text.Block>
+                      <Text.Block h5>
+                          Please note that we count shares using PPLNS. Your real balance is only reflected on the next block we find. This estimate varies based on our total hashrate variance.
                           {' '}
                         <Text.Anchor
                           href='https://minergate.com/faq/difference-between-pps-and-pplns'
@@ -159,7 +162,7 @@ class Address extends Component {
                           >
                             Learn about PPLNS vs. PPS.
                           </Text.Anchor>
-                      </Text>
+                      </Text.Block>
                     </Column>
                   </Row>
                 </Card>
@@ -200,10 +203,8 @@ class Address extends Component {
                           ? <h1>Loading</h1>
                           : <HashrateChart
                             data={mainStore.addressStats.hashrate
-                                .sort(
-                                  (a, b) => new Date(a.time) - new Date(b.time)
-                                )
-                                .splice(0, 150)}
+                                .slice(0, 50)
+                                .reverse()}
                             />}
                     </Card>
                   </Column>

@@ -24,9 +24,15 @@ Text.Link = Text.withComponent(({ small, nav, marginLeft, ...rest }) => (
 `
 
 Text.Anchor = Text.withComponent(
-  ({ marginLeft, marginRight, marginTop, marginBottom, ...rest }) => (
-    <a {...rest} />
-  )
+  ({
+    marginLeft,
+    marginRight,
+    marginTop,
+    marginBottom,
+    h5,
+    secondary,
+    ...rest
+  }) => <a {...rest} />
 ).extend`
   text-decoration: none;
 `
