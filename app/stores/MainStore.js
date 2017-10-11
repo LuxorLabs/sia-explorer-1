@@ -55,7 +55,6 @@ export class MainStore {
   handleLocale = () => {
     const locale = browserLocale().split('-')
     const lang = locale[0].toLowerCase()
-    console.log(locale)
     if (lang === 'zh') {
       this.i18nConfig.locale = 'zh'
       this.i18nConfig.messages = langZh
