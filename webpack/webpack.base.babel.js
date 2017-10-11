@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = options => ({
   entry: options.entry,
@@ -56,7 +57,11 @@ module.exports = options => ({
     new webpack.ProvidePlugin({
       fetch: 'exports-loader?'
     }),
-
+    new CopyWebpackPlugin([
+      {
+        from: 'static'
+      }
+    ]),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)

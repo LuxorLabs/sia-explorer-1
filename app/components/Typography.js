@@ -17,9 +17,9 @@ export const Text = styled.span`
 
 Text.Block = Text.withComponent('div')
 
-Text.Link = Text.withComponent(({ small, nav, marginLeft, ...rest }) => (
-  <Link {...rest} />
-)).extend`
+Text.Link = Text.withComponent(
+  ({ small, nav, marginLeft, secondary, h2, ...rest }) => <Link {...rest} />
+).extend`
   text-decoration: none;
 `
 
