@@ -61,7 +61,6 @@ class Miners extends Component {
         return b.hashrate - a.hashrate
       })
       .filter(a => a.hashrate > 0)
-      .slice(0, 20)
       .map((m, i) => {
         const time = m.miners && m.miners.length > 0
           ? m.miners.map(w => w.last_beat).reduce((c, a) => (c > a ? c : a))
