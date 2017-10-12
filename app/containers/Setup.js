@@ -99,7 +99,10 @@ class Setup extends Component {
                   </li>
                 </ol>
               </SetupCard>
-              <SetupCard anchor={1} title='Quickstart'>
+              <SetupCard
+                anchor={1}
+                title={<FormattedMessage id='setup.quickstart' />}
+              >
                 <Text.Block>
                   <FormattedMessage id='setup.quickstartDesc' />
                 </Text.Block>
@@ -159,7 +162,10 @@ class Setup extends Component {
                   </li>
                 </ul>
               </SetupCard>
-              <SetupCard anchor={2} title='Compatible Miners'>
+              <SetupCard
+                anchor={2}
+                title={<FormattedMessage id='setup.miners' />}
+              >
                 <Text.Block marginBottom={10}>
                   <FormattedMessage id='setup.minersDesc' />
                 </Text.Block>
@@ -215,7 +221,10 @@ class Setup extends Component {
                   </Text.Anchor>
                 </Text.Block>
               </SetupCard>
-              <SetupCard anchor={3} title='Pre-Built Commands'>
+              <SetupCard
+                anchor={3}
+                title={<FormattedMessage id='setup.prebuiltCommands' />}
+              >
                 <Text.Block marginBottom={10}>
                   <FormattedMessage id='setup.prebuiltCommandsDesc_1' />
                 </Text.Block>
@@ -255,12 +264,18 @@ class Setup extends Component {
                   EthDcrMiner64.exe -epool us1.ethpool.org:3333 -ewal YourEthAddress.YourWorkerName -epsw x -dpool stratum+tcp://us-east.luxor.tech:7777 -dwal YourSiacoinAddress.YourWorkerName -dcoin sia
                 </Text.Pre>
               </SetupCard>
-              <SetupCard anchor={4} title="What's Claymore">
+              <SetupCard
+                anchor={4}
+                title={<FormattedMessage id='setup.claymore' />}
+              >
                 <Text.Block>
                   <FormattedMessage id='setup.claymoreDesc' />
                 </Text.Block>
               </SetupCard>
-              <SetupCard anchor={5} title='Regions'>
+              <SetupCard
+                anchor={5}
+                title={<FormattedMessage id='setup.regions' />}
+              >
                 <Text.Block marginBottom={20}>
                   <FormattedMessage id='setup.regionsDesc' />
                 </Text.Block>
@@ -270,7 +285,10 @@ class Setup extends Component {
                   data={serverLocations}
                 />
               </SetupCard>
-              <SetupCard anchor={6} title='Hosted Mining'>
+              <SetupCard
+                anchor={6}
+                title={<FormattedMessage id='setup.hostedMining' />}
+              >
                 <Text.Anchor
                   href='https://www.miningrigrentals.com/register?ref=43501'
                   target='_blank'
@@ -292,7 +310,10 @@ class Setup extends Component {
                   <FormattedMessage id='setup.hostedMiningDesc_2' />
                 </Text.Block>
               </SetupCard>
-              <SetupCard anchor={7} title='Questions?'>
+              <SetupCard
+                anchor={7}
+                title={<FormattedMessage id='setup.questions' />}
+              >
                 <Text.Block>
                   <FormattedMessage id='setup.questionsDesc_1' />
                   {' '}
