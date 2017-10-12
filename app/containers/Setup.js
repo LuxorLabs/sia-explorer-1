@@ -234,13 +234,13 @@ class Setup extends Component {
                   CCMiner:
                 </Text.Block>
                 <Text.Pre>
-                  ccminer -a sia -e — url=stratum+tcp://us-east.luxor.tech:3333 -u YourSiacoinAddress.YourWorkerName -i 28
+                  ccminer -a sia -e --url=stratum+tcp://us-east.luxor.tech:3333 -u YourSiacoinAddress.YourWorkerName -i 28
                 </Text.Pre>
                 <Text.Block marginBottom={10}>
                   SGMiner:
                 </Text.Block>
                 <Text.Pre>
-                  sgminer — algorithm=sia — url=stratum+tcp://us-east.luxor.tech:3333 — userpass=YourSiacoinAddress.YourWorkerName -I 28
+                  sgminer --algorithm=sia --url=stratum+tcp://us-east.luxor.tech:3333 --userpass=YourSiacoinAddress.YourWorkerName -I 28
                 </Text.Pre>
                 <Text.Block marginBottom={10}>
                   GoMiner:
