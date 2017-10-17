@@ -9,6 +9,7 @@ import browserLocale from 'utils/locale'
 const summaryCardState = {
   unpaidBalance: '0 SC',
   estimatedPayout: '0 SC',
+  ppsBalance: '0 SC',
   hashrate: '0',
   efficiency: '0',
   paidRewards: '0 SC',
@@ -82,9 +83,6 @@ export class MainStore {
       const efficiency = `${this.userEff(address)}%`
       return {
         unpaidBalance: `${calc.hastingsToSC(stats.balance).toFixed(2)} SC`,
-        estimatedPayout: `${calc
-          .hastingsToSC(this.userPayoutRound(address))
-          .toFixed(2)} SC`,
         paidRewards: `${calc.hastingsToSC(stats.total_payouts).toFixed(2)} SC`,
         blocksFound: stats.blocks_found,
         hashrate,

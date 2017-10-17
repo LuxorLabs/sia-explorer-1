@@ -149,20 +149,11 @@ class Address extends Component {
                   <Row>
                     <Column style={{ textAlign: 'center' }}>
                       <Text.Block h4>
-                        {summary.estimatedPayout}
+                        {summary.unpaidBalance}
                       </Text.Block>
                       <Text.Block h5>
-                          Please note that we count shares using PPLNS. Your real balance is only reflected on the next block we find. This estimate varies based on our total hashrate variance.
-                          {' '}
-                        <Text.Anchor
-                          href='https://minergate.com/faq/difference-between-pps-and-pplns'
-                          target='_blank'
-                          h5
-                          secondary
-                          >
-                            Learn about PPLNS vs. PPS.
-                          </Text.Anchor>
-                      </Text.Block>
+                          Please note that we count shares using PPS. This means consistent payouts at 500 SC. Your current balance is reflected here.
+                        </Text.Block>
                     </Column>
                   </Row>
                 </Card>
