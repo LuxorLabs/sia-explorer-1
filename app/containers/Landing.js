@@ -113,19 +113,19 @@ class Landing extends React.Component {
                     justifyContent='space-around'
                   >
                     <Column fluid xs={4}>
-                      <Text.Block huge bold>2.5%</Text.Block>
+                      <Text.Block huge bold>2%</Text.Block>
                       <Text.Block small bold>
                         <FormattedMessage id='landing.prePitchMini1' />
                       </Text.Block>
                     </Column>
                     <Column fluid xs={4}>
-                      <Text.Block huge bold>3%</Text.Block>
+                      <Text.Block huge bold>0.3%</Text.Block>
                       <Text.Block small bold>
                         <FormattedMessage id='landing.prePitchMini2' />
                       </Text.Block>
                     </Column>
                     <Column fluid xs={4}>
-                      <Text.Block huge bold>10%</Text.Block>
+                      <Text.Block huge bold>100%</Text.Block>
                       <Text.Block small bold>
                         <FormattedMessage id='landing.prePitchMini3' />
                       </Text.Block>

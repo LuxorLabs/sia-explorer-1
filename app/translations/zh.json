@@ -11,7 +11,7 @@
   "landing.subtitle": "Luxor不仅是一个快速且稳定的Sia矿池，同时Luxor将把其收益的一部分捐献给Sia开发团队",
   "landing.setupButton": "开始安装",
   "landing.prePitch": "由Sia核心贡献者创建的速度极快的矿池",
-  "landing.prePitchMini1": "算力靠前矿工仅需2.5%的费率",
+  "landing.prePitchMini1": "阻止奖励",
   "landing.prePitchMini2": "其他矿工仅需3%费率",
   "landing.prePitchMini3": "矿池10%收益捐献给Sia团队",
   "landing.pitchTitle1_1": "您可以通过算力赚取收入.",

@@ -11,7 +11,7 @@
   "landing.subtitle": "Luxor is a fast and stable Sia pool that donates a portion of profits back to the core developers",
   "landing.setupButton": "Setup Now",
   "landing.prePitch": "A blazing fast pool created by Sia Core Contributors",
-  "landing.prePitchMini1": "fee for top miners",
+  "landing.prePitchMini1": "block reward for finders",
   "landing.prePitchMini2": "fee for miners",
   "landing.prePitchMini3": "of fee profits to Sia",
   "landing.pitchTitle1_1": "Earn with your hashpower.",
