@@ -70,6 +70,16 @@ const ReverseRow = styled(Row)`
   flex-direction: row-reverse;
 `
 
+const NewsCard = styled(Card)`
+  padding: 15px;
+`
+
+const NewsButton = styled(Button.a)`
+  height: 30px;
+  line-height: 30px;
+  font-size: 0.9rem;
+`
+
 @inject('mainStore')
 @observer
 class Landing extends React.Component {
@@ -80,6 +90,36 @@ class Landing extends React.Component {
         <Navbar />
         <Section ptm={70} pbm={70}>
           <Container>
+            <Row>
+              <Column fluid md={6} mdShift={3}>
+                <NewsCard altL1>
+                  <Row>
+                    <Column
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center'
+                      }}
+                      fluid
+                      md={9}
+                    >
+                      <Text h5>
+                        Read our official launch post from our co-founder Nick Hansen
+                      </Text>
+                    </Column>
+                    <Column fluid md={3}>
+                      <NewsButton
+                        href='https://medium.com/@nitronick600/introducing-luxor-mining-31b8cb83e21f'
+                        target='_blank'
+                        style={{ float: 'right' }}
+                      >
+                        Read Post
+                      </NewsButton>
+                    </Column>
+                  </Row>
+                </NewsCard>
+              </Column>
+            </Row>
             <Row justifyContent='center'>
               <HeroImageWrapper>
                 <SVGInline svg={heroSvg} />

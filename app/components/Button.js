@@ -17,6 +17,7 @@ export const Button = styled.button`
   border-radius: ${styles.radius.base}px;
   color: ${styledProps(styles.color, 'color')};
   background: ${styledProps(styles.color, 'background')};
+  cursor: pointer;
   &:focus {
     outline: none;
   }
