@@ -7,6 +7,8 @@
   "nav.setup": "Setup Guide",
   "nav.blocks": "Blocks",
   "nav.miners": "Miners",
+  "landing.news": "Read our official launch post from our co-founder Nick Hansen",
+  "landing.newsCTA": "Read Post",
   "landing.greeting": "A next generation mining pool",
   "landing.subtitle": "Luxor is a fast and stable Sia pool that donates a portion of profits back to the core developers",
   "landing.setupButton": "Setup Now",

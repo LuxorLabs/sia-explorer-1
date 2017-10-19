@@ -80,6 +80,27 @@ const NewsButton = styled(Button.a)`
   font-size: 0.9rem;
 `
 
+const NewCol = styled(Column)`
+  text-align: center;
+  button {
+    margin: 0 auto;
+  }
+  ${breakpoint('md', styles.breakpoint)`
+      span {
+        text-align: left;
+      }
+      button {
+        float: right;
+      }
+  `}
+  
+`
+
+const articleLinks = {
+  zh: 'http://www.jianshu.com/p/51f419e31a33',
+  en: 'https://medium.com/@nitronick600/introducing-luxor-mining-31b8cb83e21f'
+}
+
 @inject('mainStore')
 @observer
 class Landing extends React.Component {
@@ -94,7 +115,7 @@ class Landing extends React.Component {
               <Column fluid md={6} mdShift={3}>
                 <NewsCard altL1>
                   <Row>
-                    <Column
+                    <NewCol
                       style={{
                         display: 'flex',
                         flexDirection: 'column',
@@ -104,18 +125,21 @@ class Landing extends React.Component {
                       md={9}
                     >
                       <Text h5>
-                        Read our official launch post from our co-founder Nick Hansen
+                        <FormattedMessage id='landing.news' />
                       </Text>
-                    </Column>
-                    <Column fluid md={3}>
+                    </NewCol>
+                    <NewCol fluid md={3}>
                       <NewsButton
-                        href='https://medium.com/@nitronick600/introducing-luxor-mining-31b8cb83e21f'
+                        href={
+                          this.props.mainStore.i18nConfig.locale === 'zh'
+                            ? articleLinks.zh
+                            : articleLinks.en
+                        }
                         target='_blank'
-                        style={{ float: 'right' }}
                       >
-                        Read Post
+                        <FormattedMessage id='landing.newsCTA' />
                       </NewsButton>
-                    </Column>
+                    </NewCol>
                   </Row>
                 </NewsCard>
               </Column>
