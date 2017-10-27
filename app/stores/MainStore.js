@@ -29,6 +29,7 @@ const singleWorkState = {
 
 const singlePayoutState = {
   date: 'Never',
+  dateTime: 0,
   amount: '0 SC',
   txid: 'N/A',
   status: 'unconfirmed'
@@ -134,6 +135,7 @@ export class MainStore {
         return {
           amount: `${calc.hastingsToSC(p.amount).toFixed(2)} SC`,
           date: moment(p.time).fromNow(),
+          dateTime: moment(p.time).unix(),
           txid: p.tx_id,
           username: p.username
         }

@@ -78,6 +78,10 @@ const NewsButton = styled(Button.a)`
   height: 30px;
   line-height: 30px;
   font-size: 0.9rem;
+  margin: 1rem;
+  ${breakpoint('md', styles.breakpoint)`
+    margin: 0;
+  `}
 `
 
 const NewCol = styled(Column)`

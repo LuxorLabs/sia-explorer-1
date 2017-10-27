@@ -40,9 +40,12 @@ class Address extends Component {
     })
   }
   mapPayouts = () => {
-    return this.props.mainStore.summaryPayoutStats.map(p => {
-      return [p.date, p.amount, p.txid, 'Confirmed']
-    })
+    return this.props.mainStore.summaryPayoutStats
+      .sort((a, b) => b.dateTime - a.dateTime)
+      .slice(0, 30)
+      .map(p => {
+        return [p.date, p.amount, p.txid, 'Confirmed']
+      })
   }
   mapShares = () => {
     const { addressStats } = this.props.mainStore

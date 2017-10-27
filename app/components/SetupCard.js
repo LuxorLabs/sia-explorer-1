@@ -24,7 +24,7 @@ class SetupCard extends Component {
       <ScrollableAnchor id={anchor || 'disabled'}>
         <CardWrap>
           <Section.readableCard alt>
-            <Text.Block marginBottom={20} secondary h4>
+            <Text.Block fontWeight={800} marginBottom={20} secondary h2>
               {this.props.title}
             </Text.Block>
             {this.props.children}

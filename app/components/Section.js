@@ -15,11 +15,15 @@ export const Section = styled.section`
 
 Section.readableCard = styled(Section)`
   max-width: 600px;
-  padding: 40px;
+  padding: 20px;
   margin-bottom: 30px;
   background: ${styledProps(styles.color, 'background')};
   box-shadow: 0 2px 45px 0 rgba(0,0,0,0.21);
   margin: 100px 0;
+  line-height: 1.5rem;
+  ${breakpoint('md', styles.breakpoint)`
+    padding: 80px;
+  `}
 `
 
 Section.readableCard.defaultProps = {
