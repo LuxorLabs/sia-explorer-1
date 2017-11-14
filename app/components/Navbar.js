@@ -9,6 +9,7 @@ import Container from 'components/Container'
 import { Row, Column } from 'hedron'
 import Waypoint from 'react-waypoint'
 import { FormattedMessage } from 'react-intl'
+import Searchbar from 'components/Searchbar'
 
 const Links = [
   {
@@ -37,7 +38,7 @@ const NavContainer = styled(Container)`
     .logo {
       display: block;
     }
-  `}
+  `};
 `
 const NavListItem = styled.li`
   display: inline-block;
@@ -53,7 +54,7 @@ const NavListItem = styled.li`
     display: inline-block;
     background: transparent;
     text-align: right;
-  `}
+  `};
 `
 NavListItem.defaultProps = {
   background: 'alt'
@@ -66,12 +67,12 @@ const NavList = styled.ul`
   list-style: none;
   padding-left: 0;
   overflow-x: auto;
-  white-space:nowrap;
+  white-space: nowrap;
   transform: ${props => (props.active ? `translateY(0)` : `translateY(500%)`)};
   transition: all ${styles.transition.base};
   margin-bottom: 10px;
-  &::-webkit-scrollbar { 
-    display: none; 
+  &::-webkit-scrollbar {
+    display: none;
   }
   ${breakpoint('md', styles.breakpoint)`
     display: flex;
@@ -82,7 +83,7 @@ const NavList = styled.ul`
     white-space: normal;
     overflow-x: none;
     width: 100%;
-  `}
+  `};
 `
 
 const NavListOuter = styled.div`
@@ -96,7 +97,7 @@ const NavListOuter = styled.div`
     left: 0;
     position: relative;
     transform: translateX(0);
-  `}
+  `};
 `
 
 const CloseMenu = styled.button`
@@ -114,7 +115,7 @@ const CloseMenu = styled.button`
   transition: all ${styles.transition.base};
   &:before {
     position: absolute;
-    content:"";
+    content: '';
     height: 20px;
     width: 1.5px;
     left: 50%;
@@ -127,7 +128,7 @@ const CloseMenu = styled.button`
   }
   &:after {
     position: absolute;
-    content:"";
+    content: '';
     height: 20px;
     width: 1.5px;
     left: 50%;
@@ -143,7 +144,7 @@ const CloseMenu = styled.button`
   }
   ${breakpoint('md', styles.breakpoint)`
     display:none
-  `}
+  `};
 `
 
 const SearchOuter = styled.div`
@@ -162,24 +163,29 @@ class Navbar extends Component {
   mapLinks = links =>
     links.map(({ name, to }, i) => (
       <NavListItem key={i}>
-        <Text.Link nav to={to}>{name}</Text.Link>
+        <Text.Link nav to={to}>
+          {name}
+        </Text.Link>
       </NavListItem>
     ))
   render () {
     return (
       <NavContainer>
         <Row alignItems='center'>
-          <Column className='logo' fluid md={3}>
-            <Text.Link nav to='/' marginLeft={15}>Luxor Mining</Text.Link>
+          <Column className='logo' fluid md={2}>
+            <Text.Link nav to='/' marginLeft={15}>
+              Luxor Mining
+            </Text.Link>
           </Column>
-          <Column fluid md={9}>
+          <Column md={6}>
+            <Searchbar />
+          </Column>
+          <Column fluid md={4}>
             <NavListOuter>
               {/* <SearchOuter active={this.state.active}>
                 <SearchInput placeholder='Search Miner Address' type='text' />
               </SearchOuter> */}
-              <NavList active={this.state.active}>
-                {this.mapLinks(Links)}
-              </NavList>
+              <NavList active={this.state.active}>{this.mapLinks(Links)}</NavList>
               <CloseMenu
                 active={this.state.active}
                 onClick={() => this.setState({ active: !this.state.active })}

@@ -23,6 +23,7 @@ export default (() => {
       get altD2 () {
         return darken(0.08, this.alt)
       },
+      green: '#1FEA77',
       altDark: '#1D2329',
       light: '#FFFFFF',
       darkYellow: '#A38945',

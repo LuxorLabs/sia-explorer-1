@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { Router } from 'react-router-dom'
+import { createBrowserHistory as createHistory } from 'history'
 import Route from 'components/ScrollToTopRoute'
 import { injectGlobal } from 'styled-components'
 import breakpoint from 'styled-components-breakpoint'
@@ -51,14 +52,14 @@ injectGlobal`
       transform: rotate(360deg);
     }
   }
-  html { 
+  html {
     height: 100%;
     font-size: ${styles.fontSize.basePxMobile}px;
     ${breakpoint('md', styles.breakpoint)`
-      font-size: ${styles.fontSize.basePxTablet}px;    
+      font-size: ${styles.fontSize.basePxTablet}px;
     `}
     ${breakpoint('lg', styles.breakpoint)`
-      font-size: ${styles.fontSize.basePx}px;    
+      font-size: ${styles.fontSize.basePx}px;
     `}
   }
   body {
@@ -73,7 +74,7 @@ injectGlobal`
   ul,ol {
     margin: 0.8rem 0 0.8rem 0.8rem;
     padding: 0;
-    
+
     li {
       margin-top: 0.6rem;
     }
@@ -90,11 +91,15 @@ injectGlobal`
       list-style-type: circle;
     }
   }
-  
+  *:focus {
+    outline: none;
+  }
+
 `
 @inject('mainStore')
 @observer
 class App extends React.Component {
+  history = createHistory(this.props)
   componentDidMount () {
     this.props.mainStore.intervalFetch()
     this.props.mainStore.handleLocale()
@@ -106,7 +111,7 @@ class App extends React.Component {
     const { i18nConfig } = this.props.mainStore
     return (
       <IntlProvider locale={i18nConfig.locale} messages={i18nConfig.messages}>
-        <Router>
+        <Router history={this.history}>
           <div className='app'>
             <Route exact path='/' component={Landing} />
             <Route exact path='/miners' component={Miners} />
