@@ -16,7 +16,7 @@ import calc from 'utils/calc'
 class Blocks extends Component {
   mapBlocks = blocks =>
     blocks
-      .sort((a, b) => a.timestamp < b.timestamp)
+      .sort((a, b) => b.height - a.height)
       .map(b => [
         b.height,
         b.hash,
