@@ -122,12 +122,31 @@ class Address extends Component {
     const user = this.props.match.params.address
     const summary = this.props.mainStore.summaryCardStats
     const { mainStore } = this.props
+    console.log('error', mainStore.UI.Address.error)
     return (
       <div>
         <Topbar />
         <Navbar />
         {mainStore.UI.Address.loading
-          ? <Loading />
+          ? mainStore.UI.Address.error
+              ? <Section>
+                {' '}<Container>
+                  <Row>
+                    <Column
+                      style={{
+                        textAlign: 'center',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis'
+                      }}
+                      >
+                      <Text>
+                        {user} does not exist!
+                        </Text>
+                    </Column>
+                  </Row>
+                </Container>
+              </Section>
+              : <Loading />
           : <div>
             <Section>
               <Container>

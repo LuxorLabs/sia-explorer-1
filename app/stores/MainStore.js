@@ -48,7 +48,8 @@ export class MainStore {
       activeIndex: '0'
     },
     Address: {
-      loading: true
+      loading: true,
+      error: false
     }
   }
 
@@ -202,10 +203,16 @@ export class MainStore {
   }
 
   fetchAddress = address => {
-    axios.get(`/api/user/${address}`).then(({ data }) => {
-      this.addressStats = data
-      this.UI.Address.loading = false
-    })
+    axios
+      .get(`/api/user/${address}`)
+      .then(({ data }) => {
+        this.addressStats = data
+        this.UI.Address.loading = false
+        this.UI.Address.error = false
+      })
+      .catch(() => {
+        this.UI.Address.error = true
+      })
   }
 
   fetchPrice = () => {

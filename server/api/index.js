@@ -18,27 +18,31 @@ router.get('/stats', (req, res) => {
   cache.get(STATS_KEY, (err, val) => {
     if (!err) {
       if (val === undefined) {
-        //cache miss
+        // cache miss
         luxor
           .get('/api/stats')
           .then(({ data }) => {
             cache.set(STATS_KEY, data)
             res.send(data)
-          }).catch(err => {
+          })
+          .catch(err => {
             console.log(err)
           })
       } else {
-        //cache hit (woo!)
+        // cache hit (woo!)
         res.send(val)
       }
     } else {
-      console.log('Error in caching stats infrastructure.  This needs to be investigated. Making the API call as a fallback')
+      console.log(
+        'Error in caching stats infrastructure.  This needs to be investigated. Making the API call as a fallback'
+      )
       luxor
         .get('/api/stats')
         .then(({ data }) => {
           cache.set(STATS_KEY, data)
           res.send(data)
-        }).catch(err => {
+        })
+        .catch(err => {
           console.log(err)
         })
     }
@@ -50,7 +54,7 @@ router.get('/user/:address', (req, res) => {
   cache.get(address, (err, val) => {
     if (!err) {
       if (val === undefined) {
-        //cache miss
+        // cache miss
         luxor
           .get(`/api/user/${address}`)
           .then(({ data }) => {
@@ -58,14 +62,17 @@ router.get('/user/:address', (req, res) => {
             res.send(data)
           })
           .catch(err => {
+            res.send(404, 'Cannot find address')
             console.log(err)
           })
       } else {
-        //cache hit. 
+        // cache hit.
         res.send(val)
       }
     } else {
-      console.log('Error in caching address infrastructure.  This needs to be investigated. Making the API call as a fallback')
+      console.log(
+        'Error in caching address infrastructure.  This needs to be investigated. Making the API call as a fallback'
+      )
       luxor
         .get(`/api/user/${address}`)
         .then(({ data }) => {
@@ -93,11 +100,13 @@ router.get('/price', (req, res) => {
           })
           .catch(console.error)
       } else {
-        //cache hit
+        // cache hit
         res.send(val)
       }
     } else {
-      console.log('Error in caching CMC infrastructure.  This needs to be investigated. Making the API call as a fallback')
+      console.log(
+        'Error in caching CMC infrastructure.  This needs to be investigated. Making the API call as a fallback'
+      )
       cmc
         .getTicker({
           currency: 'siacoin'
@@ -109,7 +118,6 @@ router.get('/price', (req, res) => {
         .catch(console.error)
     }
   })
-
 })
 
 module.exports = router
