@@ -6,7 +6,7 @@ const cache = new NodeCache({ stdTTL: 10, checkperiod: 120 })
 
 const luxor = axios.create({
   baseURL: 'http://api.luxor.tech:8082',
-  timeout: 10000
+  timeout: 20000
 })
 
 const cmc = new CoinMarketCap()
