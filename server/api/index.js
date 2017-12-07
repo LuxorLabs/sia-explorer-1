@@ -5,85 +5,72 @@ const NodeCache = require('node-cache')
 const cache = new NodeCache({ stdTTL: 10, checkperiod: 120 })
 
 const luxor = axios.create({
-  baseURL: 'http://api.luxor.tech:8082',
-  timeout: 30000
+  baseURL: 'http://explorer.luxor.tech:6000',
+  timeout: 15000,
+  headers: {
+    'User-Agent': 'Sia-Agent'
+  }
 })
 
 const cmc = new CoinMarketCap()
 
-const STATS_KEY = 'StatsKey'
 const TICKER_KEY = 'Ticker'
 
-router.get('/stats', (req, res) => {
-  cache.get(STATS_KEY, (err, val) => {
-    if (!err) {
-      if (val === undefined) {
-        // cache miss
-        luxor
-          .get('/api/stats')
-          .then(({ data }) => {
-            cache.set(STATS_KEY, data)
-            res.send(data)
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      } else {
-        // cache hit (woo!)
-        res.send(val)
-      }
-    } else {
-      console.log(
-        'Error in caching stats infrastructure.  This needs to be investigated. Making the API call as a fallback'
-      )
-      luxor
-        .get('/api/stats')
-        .then(({ data }) => {
-          cache.set(STATS_KEY, data)
-          res.send(data)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }
-  })
+/*
+/explorer
+/explorer/pending
+/explorer/ws
+/explorer/tx/ws
+/explorer/blocks/:height
+/explorer/hashes/:hash
+*/
+
+// returns curr block
+router.get('/block', (req, res) => {
+  luxor
+    .get('/explorer')
+    .then(({ data }) => {
+      cache.set(BLOCK_KEY, data)
+      res.send(data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
 })
 
-router.get('/user/:address', (req, res) => {
-  const address = req.params.address
-  cache.get(address, (err, val) => {
-    if (!err) {
-      if (val === undefined) {
-        // cache miss
-        luxor
-          .get(`/api/user/${address}`)
-          .then(({ data }) => {
-            cache.set(address, data)
-            res.send(data)
-          })
-          .catch(err => {
-            res.send(404, 'Cannot find address')
-            console.log(err)
-          })
-      } else {
-        // cache hit.
-        res.send(val)
-      }
-    } else {
-      console.log(
-        'Error in caching address infrastructure.  This needs to be investigated. Making the API call as a fallback'
-      )
-      luxor
-        .get(`/api/user/${address}`)
-        .then(({ data }) => {
-          cache.set(address, data)
-          res.send(data)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }
-  })
+router.get('/block/:height', (req, res) => {
+  const { height } = req.params
+  luxor
+    .get(`/explorer/blocks/${height}`)
+    .then(({ data }) => {
+      res.send(data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+
+router.get('/hash/:hash', (req, res) => {
+  const { hash } = req.params
+  luxor
+    .get(`/explorer/hashes/${hash}`)
+    .then(({ data }) => {
+      res.send(data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+
+router.get('/pending', (req, res) => {
+  luxor
+    .get('/explorer/pending')
+    .then(({ data }) => {
+      res.send(data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
 })
 
 router.get('/price', (req, res) => {

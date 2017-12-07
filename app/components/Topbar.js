@@ -44,7 +44,7 @@ const TopbarInner = styled(Row)`
   `
 
 TopbarOuter.defaultProps = {
-  background: 'darkYellow'
+  background: 'dark'
 }
 
 @inject('mainStore')
@@ -74,22 +74,22 @@ class Topbar extends Component {
               </Text>
             </Column>
             <Column fluid md={4} style={{ textAlign: 'center' }}>
-              <button onClick={this.switchLanguage}>
+              {/* <button onClick={this.switchLanguage}>
                 {this.props.mainStore.i18nConfig.locale === 'en'
                   ? <FormattedMessage id='topbar.translate' />
                   : <FormattedMessage id='topbar.translate' />}
-              </button>
+              </button> */}
             </Column>
             <Column fluid md={4}>
               <Text marginRight={15} small>
-                <FormattedMessage id='topbar.blocksFound' /> :
-                {' '}{mainStore.blocksFound}
+                <FormattedMessage id='topbar.blockHeight' /> :
+                100530
               </Text>
-              <Text small>
+              {/* <Text small>
                 <FormattedMessage id='topbar.hashrate' /> :
                 {' '}{mainStore.totalHashrate}
                 /s
-              </Text>
+              </Text> */}
             </Column>
           </TopbarInner>
         </Container>

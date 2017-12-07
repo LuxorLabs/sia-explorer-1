@@ -4,24 +4,27 @@ import styles from 'styles'
 import { withRouter } from 'react-router-dom'
 
 const InputBar = styled.input`
-  background: ${styles.color.alt};
+  border-radius: 10px;
+  background: ${styles.color.light};
   border: none;
-  border-left: 2px solid ${styles.color.altL2};
-  height: 30px;
-  color: ${styles.color.light};
-  padding-left: 20px;
+  height: 40px;
   width: 100%;
+  color: ${styles.color.dark};
+  padding-left: 20px;
   font-size: ${styles.fontSize.small}rem;
-  transition: ${styles.transition.base};
   border-top: 1px solid transparent;
   border-right: 1px solid transparent;
   border-bottom: 1px solid transparent;
 
-  &:hover, &:active {
-    background: ${styles.color.altD1};
-    transition: ${styles.transition.base};
-    border: 1px solid ${props => (props.validated ? styles.color.green : styles.color.secondary)};
+  &:hover,
+  &:active {
+    background: ${styles.color.secondaryL1};
+    color: ${styles.color.dark};
   }
+`
+const Wrap = styled.div`
+  width: 100%;
+  padding-top: ${props => (props.paddingTop ? props.paddingTop : `0px`)};
 `
 
 class SearchBar extends Component {
@@ -43,17 +46,17 @@ class SearchBar extends Component {
   render () {
     const { address } = this.state
     return (
-      <div>
+      <Wrap {...this.props}>
         <InputBar
           type='text'
-          placeholder='Enter your miner address and press enter!'
+          placeholder='Block, Hash, Transaction ID, Address, etc.'
           onKeyPress={this._handleKeyPress}
           validated={this.isValidAddress(address)}
           name='address'
           value={address}
           onChange={this.handleInput}
         />
-      </div>
+      </Wrap>
     )
   }
 }

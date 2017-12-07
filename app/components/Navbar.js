@@ -10,6 +10,7 @@ import { Row, Column } from 'hedron'
 import Waypoint from 'react-waypoint'
 import { FormattedMessage } from 'react-intl'
 import Searchbar from 'components/Searchbar'
+import { withRouter } from 'react-router-dom'
 
 const Links = [
   {
@@ -31,6 +32,8 @@ const Links = [
 ]
 
 const NavContainer = styled(Container)`
+  padding-top: 20px;
+  padding-bottom: 20px;
   .logo {
     display: none;
   }
@@ -174,23 +177,22 @@ class Navbar extends Component {
         <Row alignItems='center'>
           <Column className='logo' fluid md={2}>
             <Text.Link nav to='/' marginLeft={15}>
-              Luxor Mining
+              Sia Explorer
             </Text.Link>
           </Column>
-          <Column md={6}>
-            <Searchbar />
-          </Column>
           <Column fluid md={4}>
-            <NavListOuter>
-              {/* <SearchOuter active={this.state.active}>
-                <SearchInput placeholder='Search Miner Address' type='text' />
-              </SearchOuter> */}
-              <NavList active={this.state.active}>{this.mapLinks(Links)}</NavList>
+            {/* <NavListOuter>
+              <NavList active={this.state.active}>
+                {this.mapLinks(Links)}
+              </NavList>
               <CloseMenu
                 active={this.state.active}
                 onClick={() => this.setState({ active: !this.state.active })}
               />
-            </NavListOuter>
+            </NavListOuter> */}
+          </Column>
+          <Column md={6}>
+            {this.props.location.pathname === '/' ? null : <Searchbar />}
           </Column>
         </Row>
       </NavContainer>
@@ -198,4 +200,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar
+export default withRouter(Navbar)

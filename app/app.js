@@ -10,10 +10,8 @@ import { inject, observer, Provider } from 'mobx-react'
 import { MainStore } from 'stores/MainStore'
 import styles from 'styles'
 import styledNormalize from 'styled-normalize'
-import interReg from 'assets/Inter-UI-Regular.woff'
-import interReg2 from 'assets/Inter-UI-Regular.woff2'
-import interMed from 'assets/Inter-UI-Medium.woff'
-import interMed2 from 'assets/Inter-UI-Medium.woff2'
+import interReg from 'assets/SofiaProRegular.woff'
+import interMed from 'assets/SofiaProMedium.woff2'
 
 import Landing from 'containers/Landing'
 import Miners from 'containers/Miners'
@@ -31,16 +29,14 @@ injectGlobal`
   ${styledNormalize}
   @font-face {
     font-family: 'Interface';
-    src: url('${interReg}') format('woff'),
-    url('${interReg2}') format('woff2');
+    src: url('${interReg}') format('woff')
     font-weight: normal;
     font-style: normal;
   }
 
   @font-face {
     font-family: 'Interface';
-    src: url('${interMed}') format('woff'),
-    url('${interMed2}') format('woff2');
+    src: url('${interMed}') format('woff2')
     font-weight: bold;
     font-style: normal;
   }
@@ -118,6 +114,7 @@ class App extends React.Component {
             <Route exact path='/blocks' component={Blocks} />
             <Route exact path='/setup' component={Setup} />
             <Route exact path='/miners/:address' component={Address} />
+            <Route exact path='/block/:height' component={Blocks} />
           </div>
         </Router>
       </IntlProvider>

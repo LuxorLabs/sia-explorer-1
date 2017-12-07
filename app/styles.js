@@ -2,7 +2,8 @@ import { lighten, darken } from 'polished'
 export default (() => {
   const styles = {
     color: {
-      primary: '#252423',
+      primary: '#2B2B2B',
+      dark: '#252423',
       secondary: '#FDF1BF',
       get secondaryL1 () {
         return lighten(0.4, this.secondary)
@@ -26,8 +27,14 @@ export default (() => {
       green: '#1FEA77',
       altDark: '#1D2329',
       light: '#FFFFFF',
+      offWhite: '#F6F8F7',
       darkYellow: '#A38945',
       discordPurple: '#7289da',
+      greenGradient: `
+        background: #11998e;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      `,
       get active () {
         return this.darkYellow
       }
@@ -72,7 +79,7 @@ export default (() => {
       spacing: 25
     },
     radius: {
-      base: 100
+      base: '10px'
     },
     transition: {
       base: `0.3s ease-in-out`

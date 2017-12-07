@@ -22,11 +22,15 @@ const FooterRow = styled(Row)`
   `}
 `
 
+const FooterWrap = styled.div`
+
+`
+
 class Footer extends Component {
   render () {
     return (
-      <div>
-        <Section pt={20} pb={20} ptm={30} pbm={30}>
+      <FooterWrap>
+        <Section background='dark' pt={20} pb={20} ptm={30} pbm={30}>
           <Container>
             <FooterRow alignItems='center'>
               <Column fluid md={6}>
@@ -38,7 +42,7 @@ class Footer extends Component {
             </FooterRow>
           </Container>
         </Section>
-      </div>
+      </FooterWrap>
     )
   }
 }

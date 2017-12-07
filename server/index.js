@@ -3,7 +3,8 @@ const logger = require('./logger')
 const argv = require('minimist')(process.argv.slice(2))
 const setup = require('./middleware/frontendMiddleware')
 const isDev = process.env.NODE_ENV !== 'production'
-const ngrok = (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel ? require('ngrok') : false
+const ngrok =
+  (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel ? require('ngrok') : false
 const resolve = require('path').resolve
 const bodyParser = require('body-parser')
 const detect = require('detect-port')
@@ -12,7 +13,7 @@ const app = express()
 const prompt = require('./react-dev-utils/prompt')
 const openBrowser = require('./react-dev-utils/openBrowser')
 const chalk = require('chalk')
-var enforce = require('express-sslify');
+var enforce = require('express-sslify')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
@@ -21,11 +22,11 @@ app.use('/api', myApi)
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
   outputPath: resolve(process.cwd(), 'build'),
-  publicPath: '/'
+  publicPath: '/',
 })
 
 if (!isDev) {
-  console.log("Enforcing HTTPS")
+  console.log('Enforcing HTTPS')
   app.use(enforce.HTTPS({ trustProtoHeader: true }))
 }
 
@@ -45,7 +46,9 @@ detect(DEFAULT_PORT).then(port => {
   }
 
   if (isInteractive) {
-    const question = chalk.yellow(`Something is already running on port ${DEFAULT_PORT}. Change ports?`)
+    const question = chalk.yellow(
+      `Something is already running on port ${DEFAULT_PORT}. Change ports?`
+    )
 
     prompt(question, true).then(shouldChangePort => {
       if (shouldChangePort) {
@@ -58,7 +61,7 @@ detect(DEFAULT_PORT).then(port => {
 })
 // Start your app.
 const run = port => {
-  app.listen(port, host, (err) => {
+  app.listen(port, host, err => {
     if (err) {
       return logger.error(err.message)
     }
@@ -76,7 +79,7 @@ const run = port => {
       logger.appStarted(port, prettyHost)
     }
     if (isDev) {
-      openBrowser(protocol + '://' + prettyHost + ':' + port + '/')
+      // openBrowser(protocol + '://' + prettyHost + ':' + port + '/')
     }
   })
 }

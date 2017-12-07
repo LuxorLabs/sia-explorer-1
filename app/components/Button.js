@@ -8,7 +8,8 @@ export const Button = styled.button`
   display: inline-block;
   padding-left: ${styles.button.spacing}px;
   padding-right: ${styles.button.spacing}px;
-  height: 40px;
+  height: 45px;
+  font-size: 14px;
   border: none;
   margin-left: ${props => props.marginLeft || 0}px;
   margin-right: ${props => props.marginRight || 0}px;

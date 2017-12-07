@@ -11,16 +11,16 @@ export const TableWrap = styled.div`
   table {
     border-collapse: collapse;
     border-spacing: 0;
-    text-align: left;  
+    text-align: left;
     width: 100%;
     table-layout: fixed;
     box-shadow: 0 2px 7px 0 rgba(0,0,0,0.10);
     transition: 3s cubic-bezier(0.075, 0.82, 0.165, 1);
-    color: ${styles.color.altL2};
+    color: ${styles.color.light};
   }
   thead {
     tr {
-      background: ${styles.color.altD1};
+      background: ${styles.color.altL1};
     }
   }
   tbody {
@@ -94,6 +94,8 @@ const SetupRegionLayout = styled(TableWrap)`
 
 `
 
+const TransactionLayout = styled(TableWrap)``
+
 const PayoutLayout = styled(TableWrap)`
 th:first-child {
   width: 100px;
@@ -128,4 +130,8 @@ export const PayoutTable = props => (
 
 export const SetupRegionTable = props => (
   <SetupRegionLayout><ResponsiveTable {...props} /></SetupRegionLayout>
+)
+
+export const TransactionTable = props => (
+  <TransactionLayout><ResponsiveTable {...props} /></TransactionLayout>
 )

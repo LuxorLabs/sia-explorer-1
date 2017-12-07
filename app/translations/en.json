@@ -1,6 +1,7 @@
 {
   "topbar.price": "Price",
   "topbar.blocksFound": "Blocks Found",
+  "topbar.blockHeight": "Block Height",
   "topbar.hashrate": "Hashrate",
   "topbar.translate": "中文",
   "nav.home": "Home",
@@ -9,8 +10,8 @@
   "nav.miners": "Miners",
   "landing.news": "Read our official launch post from our co-founder Nick Hansen",
   "landing.newsCTA": "Read Post",
-  "landing.greeting": "A next generation mining pool",
-  "landing.subtitle": "Luxor is a fast and stable Sia pool that donates a portion of profits back to the core developers",
+  "landing.greeting": "Search the Sia Blockchain",
+  "landing.subtitle": "Version 0.0.1 | Sia v1.3.1",
   "landing.setupButton": "Setup Now",
   "landing.prePitch": "A blazing fast pool created by Sia Core Contributors",
   "landing.prePitchMini1": "block reward for finders",

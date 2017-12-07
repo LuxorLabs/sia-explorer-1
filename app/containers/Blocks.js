@@ -10,22 +10,19 @@ import { Text } from 'components/Typography'
 import { BlocksTable } from 'components/Table'
 import { inject, observer } from 'mobx-react'
 import moment from 'moment'
+import mock from 'mock/block_output.json'
+
 import calc from 'utils/calc'
 @inject('mainStore')
 @observer
 class Blocks extends Component {
-  mapBlocks = blocks =>
-    blocks
-      .sort((a, b) => b.height - a.height)
-      .map(b => [
-        b.height,
-        b.hash,
-        calc.hastingsToSC(b.payout).toFixed(0),
-        moment.unix(b.timestamp).fromNow(),
-        b.paid ? 'Paid' : 'Unpaid'
-      ])
+  mapStats = block => {
+    const height = block.height
+    const id = block.blockid
+  }
   render () {
     const { mainStore } = this.props
+    const block = mock.blocks[0]
     return (
       <div>
         <Topbar />
@@ -35,7 +32,7 @@ class Blocks extends Component {
             <Row>
               <Column style={{ textAlign: 'center' }}>
                 <Text.Block h2>
-                  We have successfully mined {mainStore.blocksFound} blocks
+                  Block {block.height}
                 </Text.Block>
               </Column>
             </Row>
@@ -47,8 +44,19 @@ class Blocks extends Component {
               ? <h1>Loading</h1>
               : <BlocksTable
                 breakpoint={styles.breakpoint.lg}
-                headers={['Height', 'Hash', 'Payout', 'Time Found', 'Paid']}
-                data={this.mapBlocks(mainStore.stats.block_stats)}
+                headers={[
+                  'Height',
+                  'ID',
+                  'Parent Block',
+                  'Time',
+                  'Difficulty',
+                  'Estimated Hashrate',
+                  'Total Coins',
+                  'Active File Contracts',
+                  'Total Contract Cost',
+                  'Storage Proofs'
+                ]}
+                data={this.mapStats(block)}
                 />}
           </Container>
         </Section>

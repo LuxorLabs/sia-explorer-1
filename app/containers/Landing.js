@@ -10,6 +10,7 @@ import Navbar from 'components/Navbar'
 import { Button } from 'components/Button'
 import { Text } from 'components/Typography'
 import { Section } from 'components/Section'
+import Animation from 'components/Animation'
 import { Card } from 'components/Card'
 import Footer from 'components/Footer'
 import SVGInline from 'react-svg-inline'
@@ -17,7 +18,13 @@ import heroSvg from 'assets/imgs/hero.svg'
 import intro01 from 'assets/imgs/intro01.svg'
 import intro02 from 'assets/imgs/intro02.svg'
 import intro03 from 'assets/imgs/intro03.svg'
+import GeneralStatistics from 'components/GeneralStatistics'
+import logo from 'assets/imgs/explorer.svg'
 import { FormattedMessage } from 'react-intl'
+import Searchbar from 'components/Searchbar'
+import { TransactionTable } from 'components/Table'
+import AppliedTx from 'mock/tx_output.json'
+import calc from 'utils/calc'
 
 const HeroImageWrapper = styled.div`
   width: 100%;
@@ -97,7 +104,7 @@ const NewCol = styled(Column)`
         float: right;
       }
   `}
-  
+
 `
 
 const articleLinks = {
@@ -108,15 +115,29 @@ const articleLinks = {
 @inject('mainStore')
 @observer
 class Landing extends React.Component {
+  mapTx = data => {
+    const sumOutputs = a => a.reduce((x, y) => ({ value: x.value + y.value }))
+    const res = data.applied_txs.map(t => [
+      t.id,
+      `${calc
+        .hastingsToSC(sumOutputs(t.siacoininputoutputs).value)
+        .toFixed(2)} SC`,
+      Date.now(),
+      'Transaction'
+    ])
+
+    return res
+  }
   render () {
     return (
-      <div>
+      <div style={{ width: '100%' }}>
+        {/* <Animation /> */}
         <Topbar />
         <Navbar />
-        <Section ptm={70} pbm={70}>
+        <Section greenGradient ptm={150} pbm={150}>
           <Container>
             <Row>
-              <Column fluid md={6} mdShift={3}>
+              {/* <Column fluid md={6} mdShift={3}>
                 <NewsCard altL1>
                   <Row>
                     <NewCol
@@ -146,65 +167,76 @@ class Landing extends React.Component {
                     </NewCol>
                   </Row>
                 </NewsCard>
-              </Column>
+              </Column> */}
             </Row>
             <Row justifyContent='center'>
-              <HeroImageWrapper>
+              {/* <HeroImageWrapper>
                 <SVGInline svg={heroSvg} />
-              </HeroImageWrapper>
+              </HeroImageWrapper> */}
+
               <Column style={{ textAlign: 'center' }} sm={6}>
+                <SVGInline svg={logo} />
                 <Text.Block h2 marginBottom={20}>
                   <FormattedMessage id='landing.greeting' />
                 </Text.Block>
                 <Text.Block bold>
                   <FormattedMessage id='landing.subtitle' />
                 </Text.Block>
-                <Button.Link to='/setup' marginTop={25}>
-                  <FormattedMessage id='landing.setupButton' />
-                </Button.Link>
-              </Column>
-            </Row>
-          </Container>
-        </Section>
-        <Section alt ptm={70} pbm={70}>
-          <Container>
-            <Row alignItems='center'>
-              <Column md={6}>
-                <IntroText huge>
-                  <FormattedMessage id='landing.prePitch' />
-                </IntroText>
-              </Column>
-              <Column md={6}>
-                <Card altDark>
-                  <Row
-                    style={{ textAlign: 'center' }}
-                    justifyContent='space-around'
+                <Row style={{ paddingTop: '50px' }}>
+                  <Column
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center'
+                    }}
+                    fluid
+                    md={8}
                   >
-                    <Column fluid xs={4}>
-                      <Text.Block huge bold>2%</Text.Block>
-                      <Text.Block small bold>
-                        <FormattedMessage id='landing.prePitchMini1' />
-                      </Text.Block>
-                    </Column>
-                    <Column fluid xs={4}>
-                      <Text.Block huge bold>0.3%</Text.Block>
-                      <Text.Block small bold>
-                        <FormattedMessage id='landing.prePitchMini2' />
-                      </Text.Block>
-                    </Column>
-                    <Column fluid xs={4}>
-                      <Text.Block huge bold>100%</Text.Block>
-                      <Text.Block small bold>
-                        <FormattedMessage id='landing.prePitchMini3' />
-                      </Text.Block>
-                    </Column>
-                  </Row>
-                </Card>
+                    <Searchbar />
+                  </Column>
+                  <Column
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center'
+                    }}
+                    fluid
+                    md={4}
+                  >
+                    <Button background='altD1'>Search</Button>
+                  </Column>
+                </Row>
               </Column>
             </Row>
           </Container>
         </Section>
-        <Section ptm={70} pbm={70}>
+        <Section altD2 ptm={70} pbm={70}>
+          <Container>
+            <GeneralStatistics />
+          </Container>
+        </Section>
+        <Section dark ptm={70} pbm={70}>
+          <Container>
+            <Row>
+              <TransactionTable
+                breakpoint={styles.breakpoint.lg}
+                headers={['Height', 'Age', 'Transactions', 'Mined By', 'Size']}
+              />
+            </Row>
+          </Container>
+        </Section>
+        <Section dark ptm={70} pbm={70}>
+          <Container>
+            <Row>
+              <TransactionTable
+                breakpoint={styles.breakpoint.lg}
+                headers={['Hash', 'Amount', 'Time', 'Type']}
+                data={this.mapTx(AppliedTx)}
+              />
+            </Row>
+          </Container>
+        </Section>
+        {/* <Section ptm={70} pbm={70}>
           <Container>
             <Row>
               <Column md={6}>
@@ -224,8 +256,8 @@ class Landing extends React.Component {
               </Column>
             </Row>
           </Container>
-        </Section>
-        <Section ptm={70} pbm={70}>
+        </Section> */}
+        {/* <Section ptm={70} pbm={70}>
           <Container>
             <ReverseRow>
               <Column md={6}>
@@ -291,7 +323,7 @@ class Landing extends React.Component {
               </Column>
             </Row>
           </Container>
-        </Section>
+        </Section> */}
         <Footer />
       </div>
     )
