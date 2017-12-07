@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 import styled from 'styled-components'
 import styles from 'styles'
 import breakpoint from 'styled-components-breakpoint'
@@ -25,6 +26,7 @@ import Searchbar from 'components/Searchbar'
 import { TransactionTable } from 'components/Table'
 import AppliedTx from 'mock/tx_output.json'
 import calc from 'utils/calc'
+import { toJS } from 'mobx'
 
 const HeroImageWrapper = styled.div`
   width: 100%;
@@ -117,63 +119,38 @@ const articleLinks = {
 class Landing extends React.Component {
   mapTx = data => {
     const sumOutputs = a => a.reduce((x, y) => ({ value: x.value + y.value }))
-    const res = data.applied_txs.map(t => [
+    return data.transactions.map(t => [
       t.id,
       `${calc
         .hastingsToSC(sumOutputs(t.siacoininputoutputs).value)
         .toFixed(2)} SC`,
-      Date.now(),
-      'Transaction'
+      t.height,
+      t.filecontractids ? 'File Contract' : 'Transaction'
     ])
+  }
 
-    return res
+  mapBlocks = blocks => {
+    // ['Height', 'Age', 'Transactions', 'Difficulty', 'Active Contract Size']
+    const re = blocks.map(b => {
+      return [
+        b.height,
+        moment.unix(b.rawblock.timestamp).fromNow(),
+        b.transactions.length,
+        b.difficulty,
+        b.activecontractsize
+      ]
+    })
+    return re
   }
   render () {
+    const { latestBlocks, pendingBlock } = this.props.mainStore
     return (
       <div style={{ width: '100%' }}>
-        {/* <Animation /> */}
         <Topbar />
         <Navbar />
         <Section greenGradient ptm={150} pbm={150}>
           <Container>
-            <Row>
-              {/* <Column fluid md={6} mdShift={3}>
-                <NewsCard altL1>
-                  <Row>
-                    <NewCol
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center'
-                      }}
-                      fluid
-                      md={9}
-                    >
-                      <Text h5>
-                        <FormattedMessage id='landing.news' />
-                      </Text>
-                    </NewCol>
-                    <NewCol fluid md={3}>
-                      <NewsButton
-                        href={
-                          this.props.mainStore.i18nConfig.locale === 'zh'
-                            ? articleLinks.zh
-                            : articleLinks.en
-                        }
-                        target='_blank'
-                      >
-                        <FormattedMessage id='landing.newsCTA' />
-                      </NewsButton>
-                    </NewCol>
-                  </Row>
-                </NewsCard>
-              </Column> */}
-            </Row>
             <Row justifyContent='center'>
-              {/* <HeroImageWrapper>
-                <SVGInline svg={heroSvg} />
-              </HeroImageWrapper> */}
-
               <Column style={{ textAlign: 'center' }} sm={6}>
                 <SVGInline svg={logo} />
                 <Text.Block h2 marginBottom={20}>
@@ -220,7 +197,18 @@ class Landing extends React.Component {
             <Row>
               <TransactionTable
                 breakpoint={styles.breakpoint.lg}
-                headers={['Height', 'Age', 'Transactions', 'Mined By', 'Size']}
+                headers={[
+                  'Height',
+                  'Age',
+                  'Transactions',
+                  'Difficulty',
+                  'Active Contract Size'
+                ]}
+                data={
+                  latestBlocks.state === 'fulfilled'
+                    ? this.mapBlocks(latestBlocks.value.data.blocks)
+                    : [[0, 0, 0, 0, 0]]
+                }
               />
             </Row>
           </Container>
@@ -231,99 +219,15 @@ class Landing extends React.Component {
               <TransactionTable
                 breakpoint={styles.breakpoint.lg}
                 headers={['Hash', 'Amount', 'Time', 'Type']}
-                data={this.mapTx(AppliedTx)}
+                data={
+                  pendingBlock.state === 'fulfilled'
+                    ? this.mapTx(pendingBlock.value.data.blocks[0])
+                    : [[0, 0, 0, 0]]
+                }
               />
             </Row>
           </Container>
         </Section>
-        {/* <Section ptm={70} pbm={70}>
-          <Container>
-            <Row>
-              <Column md={6}>
-                <Text.Block marginBottom={styles.spacing.base} h3>
-                  <FormattedMessage id='landing.pitchTitle1_1' />
-                  <br />
-                  <FormattedMessage id='landing.pitchTitle1_2' />
-                </Text.Block>
-                <Text.Block>
-                  <FormattedMessage id='landing.pitchDesc1' />
-                </Text.Block>
-              </Column>
-              <Column md={6}>
-                <IntroImageWrapper>
-                  <SVGInline svg={intro01} />
-                </IntroImageWrapper>
-              </Column>
-            </Row>
-          </Container>
-        </Section> */}
-        {/* <Section ptm={70} pbm={70}>
-          <Container>
-            <ReverseRow>
-              <Column md={6}>
-                <Text.Block marginBottom={styles.spacing.base} h3>
-                  <FormattedMessage id='landing.pitchTitle2_1' />
-                  {' '}
-                  <br />
-                  <FormattedMessage id='landing.pitchTitle2_2' />
-                </Text.Block>
-                <Text.Block>
-                  <FormattedMessage id='landing.pitchDesc2' />
-                </Text.Block>
-              </Column>
-              <Column md={6}>
-                <IntroImageWrapper>
-                  <SVGInline svg={intro02} />
-                </IntroImageWrapper>
-              </Column>
-            </ReverseRow>
-          </Container>
-        </Section>
-        <Section ptm={70} pbm={70}>
-          <Container>
-            <Row>
-              <Column md={6}>
-                <Text.Block marginBottom={styles.spacing.base} h3>
-                  <FormattedMessage id='landing.pitchTitle3_1' />
-                  <br />
-                  <FormattedMessage id='landing.pitchTitle3_2' />
-                </Text.Block>
-                <Text.Block>
-                  <FormattedMessage id='landing.pitchDesc3' />
-                </Text.Block>
-                <div style={{ marginTop: `${styles.spacing.base * 5}px` }}>
-                  <Button.a
-                    target='_blank'
-                    href='https://discord.gg/sia'
-                    background='discordPurple'
-                  >
-                    <FormattedMessage id='landing.discordButton' />
-                  </Button.a>
-                </div>
-              </Column>
-              <Column md={6}>
-                <IntroImageWrapper>
-                  <SVGInline svg={intro03} />
-                </IntroImageWrapper>
-              </Column>
-            </Row>
-          </Container>
-        </Section>
-        <Section alt ptm={100} pbm={100}>
-          <Container>
-            <Row>
-              <Column style={{ textAlign: 'center' }} md={12}>
-                <Text h2>
-                  <FormattedMessage id='landing.cta' />
-                  {' '}
-                  <Text.Link h2 secondary to='/setup'>
-                    <FormattedMessage id='landing.ctaLink' />
-                  </Text.Link>
-                </Text>
-              </Column>
-            </Row>
-          </Container>
-        </Section> */}
         <Footer />
       </div>
     )

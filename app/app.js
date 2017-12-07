@@ -14,10 +14,8 @@ import interReg from 'assets/SofiaProRegular.woff'
 import interMed from 'assets/SofiaProMedium.woff2'
 
 import Landing from 'containers/Landing'
-import Miners from 'containers/Miners'
 import Blocks from 'containers/Blocks'
-import Setup from 'containers/Setup'
-import Address from 'containers/Address'
+import Hash from 'containers/Hash'
 
 import { IntlProvider, addLocaleData } from 'react-intl'
 import en from 'react-intl/locale-data/en'
@@ -110,11 +108,8 @@ class App extends React.Component {
         <Router history={this.history}>
           <div className='app'>
             <Route exact path='/' component={Landing} />
-            <Route exact path='/miners' component={Miners} />
-            <Route exact path='/blocks' component={Blocks} />
-            <Route exact path='/setup' component={Setup} />
-            <Route exact path='/miners/:address' component={Address} />
             <Route exact path='/block/:height' component={Blocks} />
+            <Route exact path='/hash/:hash' component={Hash} />
           </div>
         </Router>
       </IntlProvider>

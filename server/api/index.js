@@ -30,12 +30,38 @@ router.get('/block', (req, res) => {
   luxor
     .get('/explorer')
     .then(({ data }) => {
-      cache.set(BLOCK_KEY, data)
-      res.send(data)
+      res.send(data.blocks[0])
     })
     .catch(err => {
       console.log(err)
     })
+})
+
+router.get('/latestblocks', (req, res) => {
+  cache.get('LATEST_BLOCKS', async (err, val) => {
+    if (!err) {
+      if (val === undefined) {
+        const { data } = await luxor.get('/explorer')
+        const { height } = data.blocks[0]
+        luxor
+          .get('/explorer/blocks', {
+            params: {
+              from: height - 5,
+              to: height
+            }
+          })
+          .then(({ data }) => {
+            cache.set('LATEST_BLOCKS', data)
+            res.send(data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      } else {
+        res.send(val)
+      }
+    }
+  })
 })
 
 router.get('/block/:height', (req, res) => {
@@ -46,6 +72,7 @@ router.get('/block/:height', (req, res) => {
       res.send(data)
     })
     .catch(err => {
+      res.status(400).send(err.response.data)
       console.log(err)
     })
 })
@@ -58,6 +85,7 @@ router.get('/hash/:hash', (req, res) => {
       res.send(data)
     })
     .catch(err => {
+      res.status(400).send(err.response.data)
       console.log(err)
     })
 })

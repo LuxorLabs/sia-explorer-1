@@ -83,7 +83,9 @@ class Topbar extends Component {
             <Column fluid md={4}>
               <Text marginRight={15} small>
                 <FormattedMessage id='topbar.blockHeight' /> :
-                100530
+                {mainStore.currentBlock.state === 'fulfilled'
+                  ? ` ${mainStore.currentBlock.value.data.height}`
+                  : ' Unknown'}
               </Text>
               {/* <Text small>
                 <FormattedMessage id='topbar.hashrate' /> :

@@ -33,11 +33,13 @@ class SearchBar extends Component {
   }
   _handleKeyPress = e => {
     const address = e.target.value
-    if (e.key === 'Enter' && this.isValidAddress(address)) {
-      this.props.history.push(`/miners/${address}`)
+    if (e.key === 'Enter' && this.validBlockHeight(address)) {
+      this.props.history.push(`/block/${address}`)
+    } else if (e.key === 'Enter') {
+      this.props.history.push(`/hash/${address}`)
     }
   }
-  isValidAddress = address => address.length >= 74
+  validBlockHeight = input => parseInt(input)
   handleInput = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -51,7 +53,6 @@ class SearchBar extends Component {
           type='text'
           placeholder='Block, Hash, Transaction ID, Address, etc.'
           onKeyPress={this._handleKeyPress}
-          validated={this.isValidAddress(address)}
           name='address'
           value={address}
           onChange={this.handleInput}

@@ -19,7 +19,7 @@ require('babel-polyfill')
 const defaultState = {
   loading: true,
   error: false,
-  block: null
+  hash: null
 }
 
 @inject('mainStore')
@@ -29,11 +29,11 @@ class Blocks extends Component {
     super(props)
     extendObservable(this, defaultState)
   }
-  fetchBlock = async height => {
+  fetchBlock = async hash => {
     try {
-      const { data } = await axios.get(`/api/block/${height}`)
+      const { data } = await axios.get(`/api/hash/${hash}`)
       if (data) {
-        this.block = data.blocks[0]
+        this.hash = data
         this.loading = false
       }
     } catch (err) {
@@ -42,12 +42,12 @@ class Blocks extends Component {
     }
   }
   componentDidMount () {
-    this.fetchBlock(this.props.match.params.height)
+    this.fetchBlock(this.props.match.params.hash)
   }
   componentWillReceiveProps (newProps) {
-    if (newProps.match.params.height !== this.props.match.params.height) {
+    if (newProps.match.params.hash !== this.props.match.params.hash) {
       this.loading = true
-      this.fetchBlock(newProps.match.params.height)
+      this.fetchBlock(newProps.match.params.hash)
     }
   }
   mapStats = block => {
@@ -56,7 +56,7 @@ class Blocks extends Component {
   }
   render () {
     const { mainStore } = this.props
-    const { block } = this
+    const { hash } = this
     return (
       <div>
         <Topbar />
@@ -66,7 +66,7 @@ class Blocks extends Component {
             <Row>
               <Column style={{ textAlign: 'center' }}>
                 <Text.Block h2>
-                  Block {this.props.match.params.height}
+                  {this.props.match.params.hash}
                 </Text.Block>
               </Column>
             </Row>
@@ -79,53 +79,15 @@ class Blocks extends Component {
                 <table>
                   <tbody>
                     <tr>
-                      <td>Height</td>
-                      <td>{block.height}</td>
-                    </tr>
-                    <tr>
-                      <td>Block ID</td>
-                      <td>{block.blockid}</td>
-                    </tr>
-                    <tr>
-                      <td>Parent Block</td>
-                      <td>{block.rawblock.parentid}</td>
-                    </tr>
-                    <tr>
-                      <td>Time</td>
-                      <td>
-                        {moment.unix(block.rawblock.timestamp).fromNow()}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Difficulty</td>
-                      <td>{block.difficulty}</td>
-                    </tr>
-                    <tr>
-                      <td>Estimated Hashrate</td>
-                      <td>{block.estimatedhashrate}</td>
-                    </tr>
-                    <tr>
-                      <td>Total Coins</td>
-                      <td>{block.totalcoins}</td>
-                    </tr>
-                    <tr>
-                      <td>Active File Contracts</td>
-                      <td>{block.activecontractcount}</td>
-                    </tr>
-                    <tr>
-                      <td>Total Contract Cost</td>
-                      <td>{block.totalcontractcost}</td>
-                    </tr>
-                    <tr>
-                      <td>Storage Proofs</td>
-                      <td>{block.storageproofcount}</td>
+                      <td>Type</td>
+                      <td>{hash.hashtype}</td>
                     </tr>
                   </tbody>
                 </table>
               </TableWrap>
               : this.error
                   ? <Column style={{ textAlign: 'center', height: '80vh' }}>
-                    <h5>Block not found or does not exist!</h5>
+                    <h5>Hash not found or does not exist!</h5>
                   </Column>
                   : <Loading />}
           </Container>
